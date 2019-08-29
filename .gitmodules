@@ -1,6 +1,6 @@
-[submodule "m3.js"]
+[submodule "assets/js/m3"]
 	path = assets/js/m3
 	url = http://github.com/Csardelacal/m3.js.git
-[submodule "_SCSS"]
+[submodule "assets/scss/_"]
 	path = assets/scss/_
 	url = http://github.com/Csardelacal/underscoreSCSS.git
