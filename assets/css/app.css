@@ -1,0 +1,340 @@
+
+body, html{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding : 0;
+	font-family: verdana;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.wrapper {
+	margin: 0 auto;
+	width: 97%;
+	max-width: 30rem;
+	border-radius: 3px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+
+#map {
+	position: relative;
+	overflow: hidden;
+}
+
+#map img {
+	width: 100%;
+	vertical-align: middle;
+}
+
+.discovery-form {
+	background: rgba(255, 255, 255, 0.95);
+	margin: 0 auto;
+	padding: 1.3rem;
+	overflow: hidden;
+	transition: height .7s ease, padding .7s ease;
+}
+
+.discovery-form-header {
+	position: absolute;
+	top: 85%;
+	left: 5%;
+	transition: top .7s ease, left .7s ease;
+	white-space: nowrap;
+}
+
+.dot {
+	display: inline-block;
+	width: 1.8rem;
+	height: 1.8rem;
+	vertical-align: middle;
+	background-color: #48aeff;
+	border: solid 5px #FFF;
+	border-radius: 50%;
+
+	transition: background-color .7s ease;
+}
+
+
+.discovery-form-header .dot.business {
+	background-color: #856dff;
+}
+
+.discovery-form-header .country {
+	font-size: 1.6rem;
+	font-weight: bold;
+	color: #FFF;
+	text-shadow: 0 0 5px rgba(0, 0, 0, .5);
+	vertical-align: middle;
+	display: inline-block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+#target {
+	display: block;
+}
+
+a {
+	color: #48aeff;
+	text-decoration: none;
+}
+
+select, input[type="text"] {
+	font-family: inherit;
+	display: block;
+	-moz-appearance: none;
+	appearance: none;
+	padding: .3rem .7rem;
+	height: auto;
+	width: 100%;
+	border: solid 1px #48aeff;
+	color: #48aeff;
+	background-color: #FFF;
+	font-size: 1rem;
+	line-height: 2.2rem;
+	height: 2.2rem;
+}
+
+input[type="submit"] {
+	border: solid 1px #48aeff;
+	background: #48aeff;
+	color: #FFF;
+	padding: .3rem .7rem;
+	border-radius: 3px;
+	font-weight: bold;
+}
+
+
+.stop {
+	height: 3rem;
+	margin: 0 auto;
+	max-width: 30rem;
+	padding: .5rem .8rem;
+	overflow: hidden;
+	color: #555;
+	position: relative;
+
+	animation: stoppopup .7s;
+	animation-timing-function: linear;
+	animation-iteration-count: 1;
+}
+
+.stop .caption {
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.stop .dot {
+	position: relative;
+	z-index: 2;
+	box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+}
+
+.stop .remove {
+	background: #999;
+	color: #FFF;
+	height: 1.1rem;
+	width: 1.1rem;
+	font-size: 1rem;
+	line-height: .9rem;
+	border-radius: 50%;
+	position: absolute;
+	display: block;
+	right: 1rem;
+	top: .75rem;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.stop:before {
+	content: '';
+	position: absolute;
+	width: 3px;
+	height: calc(100% + 0.8rem);
+	background-color: #CCC;
+	top: 0rem;
+	left: 1.6rem;
+	z-index: 0;
+}
+
+.stop:first-child:before {
+	top: .5rem;
+}
+
+@keyframes stoppopup {
+	0% { height: 0rem; background-color: #FFF; padding: 0 .8rem;}
+	50% { background-color: #F99; }
+	100% { height: 3rem; background-color: transparent;
+	padding: .5rem .8rem;}
+}
+
+#target-country {
+	height: 525px;
+	transition: height .7s ease;
+}
+
+#target-country.collapsed {
+	overflow: hidden;
+	height: 150px;
+	border-radius: 3px;
+}
+
+#nationality, #visa-results {
+	overflow: hidden;
+	height: 0px;
+	transition: height .7s ease;
+}
+
+.passport-img-wrapper {
+	max-height: 120px;
+	overflow: hidden;
+}
+
+#passport-image {
+	width: 100%;
+	height: auto;
+}
+
+#target-country.collapsed #target-country-form {
+
+}
+
+.visa-result {
+	padding: .9rem .8rem;
+}
+.visa-result:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.buy-now {
+	float: right;
+	border: solid 1px #48aeff;
+	background: #48aeff;
+	color: #FFF;
+	padding: .3rem .7rem;
+	border-radius: 3px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.visa-result .buy-now.unneeded {
+	background: transparent;
+	border: none;
+	color: #888;
+}
+
+.visa-result .title {
+	display: block;
+	font-weight: bold;
+	color: #333;
+}
+
+.visa-result .description {
+	display: block;
+	color: #555;
+	font-size: .8rem;
+}
+
+.separator {
+	border-top: solid 1px #CCC;
+}
+
+
+.considerations {
+	padding: 0.3rem 0 .3rem 1rem;
+	transition: opacity .7s;
+	opacity: .7;
+}
+
+.considerations:hover {
+	opacity: 1;
+}
+
+
+.consideration .icon {
+	float: left;
+	width: 32px;
+	margin: .7rem;
+}
+
+.consideration .caption {
+	display: block;
+	color: #333;
+}
+
+.consideration .description {
+	display: block;
+	color: #555;
+	font-size: .8rem;
+}
+
+.consideration:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+/*
+ * Multi-person specific
+ */
+.avatar {
+	max-width: 100%;
+	width: 2rem;
+	margin: .1rem;
+	height: auto;
+	vertical-align: middle;
+}
+
+.person {
+	padding: .7rem 1.3rem;
+	border-top: solid 1px #DDD;
+	animation-name: personpopup;
+	animation-duration: .3s;
+	animation-iteration-count: 1;
+}
+
+.person:nth-child(2n) {
+	background: #F8F8F8;
+}
+
+.person:first-child {
+	border-top: none;
+}
+
+.person .person-name {
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.person .flag {
+	max-width: 100%;
+	width: 1.6rem;
+	margin: .3rem;
+	height: auto;
+	border-radius: 50%;
+	vertical-align: middle;
+	float: right;
+	border: solid 1px #BBB;
+	box-shadow: 0 0 5px #CCC;
+}
+
+
+@keyframes personpopup {
+	0% { height: 0rem; background-color: #FFF; padding: 0 1.3rem;}
+	50% { background-color: #F99; }
+	100% { height: 3rem; background-color: transparent;
+	padding: .5rem 1.3rem;}
+}
+
+h2 {
+	color: #888;
+	font-size: 1.2rem;
+	max-width: 30rem;
+	margin: 1rem auto;
+}

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="assets/css/app.css" />
+		<meta name="viewport" content="initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	</head>
+	<body>
+		<div class="spacer" style="height: 100px"></div>
+
+		<!-- The stops element contains the previous stops the user wishes to make-->
+		<div id="stops">
+
+		</div>
+
+		<div  class="wrapper" id="target-country" >
+			<div id="map">
+				<img src="assets/img/map-sample2.jpg">
+				<div class="discovery-form-header" id="marker" >
+					<span class="dot" style="display: none"></span>
+					<span class="country" id="label">Wohin moechten sie reisen?</span>
+				</div>
+			</div>
+
+			<form class="discovery-form" id="target-country-form" >
+				<!-- Here goes the form -->
+				<select id="target">
+					<option data-map-x="20" data-map-y="50">Bitte waehlen...</option>
+					<option data-map-x="70" data-map-y="46">Indien</option>
+					<option data-map-x="56" data-map-y="22">Russland</option>
+					<option data-map-x="39" data-map-y="28">Spanien</option>
+					<option data-map-x="09" data-map-y="28">USA</option>
+				</select>
+				<div class="spacer" style="height: 10px"></div>
+				<select id="reason">
+					<option value="tourist">Tourist / Urlauber</option>
+					<option value="business">Business</option>
+				</select>
+
+				<div class="spacer" style="height: 20px"></div>
+
+				<div style="text-align: right">
+					<a href="#add-stop" id="add-stop">Weiteres Land</a>
+					<input type="submit">
+				</div>
+
+				<div class="spacer" style="height: 10px"></div>
+			</form>
+		</div>
+
+		<div class="spacer" style="height: 30px"></div>
+
+		<div class="wrapper" id="nationality">
+			<template id="passenger">
+				<div class="person">
+					<img class="avatar">
+					<span class="person-name"></span>
+					<img class="flag">
+					<span class="nationality"></span>
+				</div>
+			</template>
+
+			<div class="spacer" style="height: 10px"></div>
+
+			<form class="discovery-form" id="nationality-form">
+				<div style="display: inline-block; width: 10%; height: 20px; float: left">
+					<img class="avatar" src="https://api.adorable.io/avatars/285/">
+				</div>
+				<div style="display: inline-block; width: 50%; float: left">
+					<input type="text" name="name" id="passport-name">
+				</div>
+
+				<div style="display: inline-block; width: 40%; float: left">
+					<select id="passport-country">
+						<option value="DE">Deutschland</option>
+						<option value="RU">Russland</option>
+						<option value="US">USA</option>
+						<option value="ES">Spanien</option>
+						<option value="IN">Indien</option>
+					</select>
+				</div>
+
+				<div style="clear: both"></div>
+
+				<div class="spacer" style="height: 20px"></div>
+
+				<div style="text-align: right">
+					<a href="#add-person" id="add-person">Weitere Person</a>
+					<input type="submit">
+				</div>
+			</form>
+		</div>
+
+		<div class="spacer" style="height: 30px"></div>
+
+		<div  id="visa-results">
+
+			<h2>User A</h2>
+			<div class="wrapper">
+				<div class="visa-result">
+					<a class="buy-now">$135.00</a>
+					<span class="title">Indien</span>
+					<span class="description">90 Tage touristen eVisum</span>
+				</div>
+
+				<div class="separator"></div>
+
+				<div class="visa-result">
+					<a class="buy-now" href="//visa-gate.com">$39.00</a>
+					<span class="title">Russland</span>
+					<span class="description">30 Tage touristen eVisum</span>
+				</div>
+			</div>
+
+			<div class="spacer" style="height: 20px"></div>
+
+			<h2>User B</h2>
+			<div class="wrapper">
+				<div class="visa-result">
+					<a class="buy-now">$135.00</a>
+					<span class="title">Indien</span>
+					<span class="description">90 Tage touristen eVisum</span>
+				</div>
+
+				<div class="separator"></div>
+
+				<div class="visa-result">
+					<a class="buy-now unneeded" href="//visa-gate.com">Nich benoetigt</a>
+					<span class="title">Russland</span>
+					<span class="description">30 Tage touristen eVisum</span>
+				</div>
+			</div>
+
+			<div class="spacer" style="height: 50px"></div>
+
+			<div class="wrapper">
+				<a href="#buy-now" class="buy-now" style="width: 100%; padding: .7rem 1.3rem; text-align:center; font-size: 1.2rem;">Alle kaufen</a>
+				<div style="clear: both"></div>
+			</div>
+
+			<div class="spacer" style="height: 50px"></div>
+
+			<h2>Was du wissen solltest</h2>
+
+			<div class="wrapper">
+				<div class="visa-result">
+					<span class="title">Indien</span>
+				</div>
+
+				<div class="considerations">
+					<div class="consideration">
+						<img class="icon" src="assets/img/considerations/health.png">
+						<span class="caption">Gelbfieber Impfung</span>
+						<span class="description">Wenn sie aus einem Land mit Gelbfieber kommen</span>
+					</div>
+						<div class="consideration">
+							<img class="icon" src="assets/img/considerations/customs.png">
+							<span class="caption">Zollbeschrenkung Bargeld</span>
+							<span class="description">Wenn sie mit mehr als ₹35000, sind sie anmeldepflichtig</span>
+						</div>
+				</div>
+
+				<div class="separator"></div>
+
+				<div class="visa-result">
+					<span class="title">Russland</span>
+				</div>
+				<div class="considerations">
+					<div class="consideration">
+						<img class="icon" src="assets/img/considerations/customs.png">
+						<span class="caption">Tabak</span>
+						<span class="description">Nicht mehr als 200; nur Erwachsene</span>
+					</div>
+					<div class="consideration">
+						<img class="icon" src="assets/img/considerations/passport.png">
+						<span class="caption">Amerikanischer Pass</span>
+						<span class="description">Dimitri nicht erlauben Americano!</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="spacer" style="height: 100px"></div>
+
+		<script>
+		(function () {
+			var map = document.getElementById('map');
+			var lbl = document.getElementById('label');
+			var rsn = document.getElementById('reason');
+			var dot = document.getElementById('marker');
+			var sel = document.getElementById('target');
+
+			var tfrm = document.getElementById('target-country-form');
+			var twrp = document.getElementById('target-country');
+			var nwrp = document.getElementById('nationality');
+			var vwrp = document.getElementById('visa-results');
+			var nfrm = document.getElementById('nationality-form');
+			var ppct = document.getElementById('passport-country');
+			var ppnm = document.getElementById('passport-name');
+			var ppim = document.getElementById('passport-image');
+
+			function addPerson() {
+				var template = document.getElementById("passenger");
+				var clone = document.importNode(template.content, true);
+
+				clone.querySelector('.avatar').src = nfrm.querySelector('.avatar').src;
+				clone.querySelector('.person-name').innerHTML = ppnm.value;
+				clone.querySelector('.flag').src = "https://lipis.github.io/flag-icon-css/flags/1x1/" + ppct.options[ppct.selectedIndex].value.toLowerCase() + ".svg";
+
+				ppnm.value = '';
+
+				template.parentNode.insertBefore(clone, template);
+			}
+
+			sel.addEventListener('change', function (e) {
+				var opt = this.options[this.selectedIndex];
+
+				lbl.innerHTML = this.options[this.selectedIndex].value;
+				dot.querySelector('.dot').style.display = null;
+
+				//Get the base values
+				var x = opt.getAttribute('data-map-x');
+				var y = opt.getAttribute('data-map-y');
+
+				//Correct for the map's offset
+				//x = x - map.clientWidth / 2 + lbl.clientWidth / 2;
+				//y = y - 50;
+
+				dot.style.left = `${x}%`;
+				dot.style.top = `${y}%`;
+			}, false);
+
+			rsn.addEventListener('change', function () {
+				var opt = this.options[this.selectedIndex].value === 'business'? 'add' : 'remove';
+				dot.querySelector('.dot').classList[opt]('business');
+			});
+
+			tfrm.addEventListener('submit', function (e) {
+				e.preventDefault();
+				e.stopPropagation();
+
+				twrp.classList.add('collapsed');
+				nwrp.style.height = 'auto';
+				nfrm.style.height = nfrm.scrollHeight + 'px';
+			});
+
+			ppct.addEventListener('change', function () {
+				var opt = this.options[this.selectedIndex].value;
+				ppim.src = `passports/${opt}.jpg`;
+			});
+
+			nfrm.addEventListener('submit', function (e) {
+				e.preventDefault();
+				e.stopPropagation();
+
+				addPerson();
+
+				nfrm.style.height = '0px';
+				nfrm.style.padding = '0px 1.3rem';
+				vwrp.style.height = vwrp.scrollHeight + 20 + 'px';
+			});
+
+			ppnm.addEventListener('keyup', function () {
+				nfrm.querySelector('.avatar').src = 'https://api.adorable.io/avatars/285/' + this.value;
+			});
+
+			document.getElementById('add-stop').addEventListener('click', function (e) {
+				var fragment = document.createElement('div');
+				fragment.innerHTML = '<div class="stop"><span class="dot"></span><span class="caption">Indien</span><span class="remove">&times;</span></div>';
+				document.getElementById('stops').appendChild(fragment.firstChild);
+			});
+
+			document.getElementById('add-person').addEventListener('click', function (e) {
+				addPerson();
+			});
+		}());
+		</script>
+	</body>
+</html>
