@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0">
+		<meta name="_scss" content="assets/scss/_/">
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+		<script src="assets/js/m3/depend.js" type="text/javascript"></script>
+		<script src="assets/js/m3/depend/router.js" type="text/javascript"></script>
+
+		<script type="text/javascript">
+		(function () {
+			depend(['m3/depend/router'], function(router) {
+				var location = document.querySelector('meta[name="_scss"]').getAttribute('content') || '/assets/scss/_/js/';
+				router.all().to(function(e) { return 'assets/js/' + e + '.js'; });
+				router.equals('_scss').to( function() { return 'assets/scss/_/js/_.scss.js'; });
+
+				router.startsWith('_scss/').to(function(str) {
+					return location + str.substring(6) + '.js';
+				});
+			});
+		}());
+		</script>
+	</head>
+	<body>
+
+		<input type="hidden" name="passport" class="autocomplete-target">
+
+		<noscript>
+			<select>
+				<!-- Foreach country -->
+			</select>
+		</noscript>
+
+		<script type="text/javascript">
+		//Application logic
+		depend(['autocomplete', 'm3/core/request'], function (autocomplete, request) {
+			autocomplete(document.querySelector('.autocomplete-target'), function (input, output) {
+				console.log(input);
+				//output([input, input + 'a', input + 'b'])
+				request('http://localhost/Visagate/search/find/country/' + input + '.json')
+				.then(JSON.parse)
+				.then(function (r) {
+					var ret = {};
+					for (var i in r) {
+						if (!r.hasOwnProperty(i)) { continue; }
+						ret[r[i].resource] = r[i].name;
+					}
+					output(ret);
+				});
+			})
+		})
+		</script>
+	</body>
+</html>
