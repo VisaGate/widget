@@ -7,12 +7,14 @@ depend(['m3/core/collection'], function (collect) {
 
 		this.render = function (wrapper) {
 			var opt = this.html = wrapper.appendChild(document.createElement('div'));
+			opt.className = 'autocomplete-result'
 			opt.value = k;
 			opt.innerHTML = v;
 
 			opt.addEventListener('click', function (e) {
 				ctx.dummy.value = v;
 				ctx.element.value = k;
+				ctx.element.dispatchEvent(new Event('change', {'bubbles': false, 'cancelable': true}));
 				e.stopPropagation();
 				ctx.reset();
 			}, false);
@@ -31,14 +33,19 @@ depend(['m3/core/collection'], function (collect) {
 
 		this.element = element;
 		this.dummy = document.createElement('input');
+		this.anchor  = document.createElement('div');
 		this.drop  = document.createElement('div');
 		this.callable = callable;
 		this.rendered = undefined;
 
 		this.dummy.type = 'text';
+		this.dummy.className = 'autocomplete-input';
+		this.anchor.className = 'autocomplete-results-anchor'
+		this.drop.className = 'autocomplete-results autocomplete-hidden'
 
 		element.parentNode.insertBefore(this.dummy,element);
-		element.parentNode.insertBefore(this.drop,element);
+		element.parentNode.insertBefore(this.anchor,element);
+		this.anchor.appendChild(this.drop);
 
 		this.draw = function (result) {
 			var rss = [];
@@ -55,16 +62,17 @@ depend(['m3/core/collection'], function (collect) {
 				}
 			}
 
-			this.reset()
+			this.reset();
 
-			console.log(rss);
 			collect(rss).each(function (e) { e.render(this.drop); });
 			this.rendered = rss;
+			this.drop.classList.remove('autocomplete-hidden');
 		}
 
 		this.reset = function () {
 			this.rendered? collect(this.rendered).each(function (e) { e.remove(); }) : null;
 			this.rendered = undefined;
+			this.drop.classList.add('autocomplete-hidden');
 		}
 
 		this.dummy.addEventListener('keyup', function (e) {
@@ -73,7 +81,9 @@ depend(['m3/core/collection'], function (collect) {
 				//Or an array
 				self.draw(result);
 			});
-
+			
+			self.element.value = '';
+			self.element.dispatchEvent(new Event('change', {'bubbles': false, 'cancelable': true}));
 			e.stopPropagation();
 		}, false);
 
