@@ -1,3 +1,57 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : Sep 10, 2019, 2:35:50 PM
+    Author     : César de la Cal Bretschneider <cesar@magic3w.com>
+*/
+
+
+* {
+	box-sizing: border-box;
+	font-family: system-ui, sans;
+}
+
+.autocomplete-input {
+	width: 100%;
+
+}
+
+.autocomplete-results-anchor {
+	position: relative;
+	width: 100%;
+}
+
+.autocomplete-results {
+	position: absolute;
+	width: 100%;
+	border: solid 1px #CCC;
+	border-radius: 5px;
+	padding: .3rem 0;
+	top: 10px;
+	z-index: 5;
+	background: #FFF;
+}
+
+.autocomplete-results.autocomplete-hidden {
+	display: none;
+}
+
+.autocomplete-results .autocomplete-result {
+	white-space: nowrap;
+	color: #555;
+	padding: .5rem .9rem;
+	font-size: .8rem;
+	cursor: pointer;
+}
+
+.autocomplete-results .autocomplete-result:hover {
+	color: #FFF;
+	background-color: #44a5eb;
+}
+
 
 body, html{
 	width: 100%;
@@ -341,3 +395,4 @@ h2 {
 	max-width: 30rem;
 	margin: 1rem auto;
 }
+

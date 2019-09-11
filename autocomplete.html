@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="viewport" content="initial-scale=1.0">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<meta name="_scss" content="assets/scss/_/">
+		<meta name="vg.api" content="http://192.168.100.97/Visagate">
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		
 		<style type="text/css">
@@ -70,8 +71,22 @@
 	<body>
 		
 		<div style="max-width: 500px; margin: 100px auto;">
-			<input type="hidden" name="passport" class="autocomplete-target">
-			<input type="submit" id="country-submit" disabled value="Next">
+			<input type="hidden" name="country" class="autocomplete-target">
+			<div class="spacer" style="height:10px"></div>
+			<input type="hidden" name="passport" class="autocomplete-passport">
+			<div class="spacer" style="height:10px"></div>
+			<div style="text-align: right">
+				<select id="language">
+					<option value="de">Deutsch</option>
+					<option value="en">English</option>
+				</select>
+				<select id="reason">
+					<option value="tourist">Tourist</option>
+					<option value="business">Gesch&auml;ftlich</option>
+					<option value="student">Student</option>
+				</select>
+				<input type="submit" id="country-submit" disabled value="Next">
+			</div>
 		</div>
 
 		<noscript>
@@ -79,12 +94,18 @@
 				<!-- Foreach country -->
 			</select>
 		</noscript>
+		
+		<div id="output" style="max-width: 500px; margin: 100px auto; color: #777; font-size: .8em"></div>
+		<div id="vg-recommendations" style="max-width: 500px; margin: 100px auto;"></div>
 
 		<script type="text/javascript">
+			
+		var api = document.querySelector('meta[name="vg.api"]').content;
+		
 		//Application logic
 		depend(['autocomplete', 'm3/core/request'], function (autocomplete, request) {
 			autocomplete(document.querySelector('.autocomplete-target'), function (input, output) {
-				request('http://localhost/Visagate/search/find/country/' + input + '.json')
+				request(api + '/search/find/country/' + input + '.json?hl=' + document.querySelector('#language').value)
 				.then(JSON.parse)
 				.then(function (r) {
 					var ret = {};
@@ -99,6 +120,55 @@
 					output(ret);
 				});
 			});
+			
+			autocomplete(document.querySelector('.autocomplete-passport'), function (input, output) {
+				request(api + '/search/find/document/' + input + '.json?hl=' + document.querySelector('#language').value)
+				.then(JSON.parse)
+				.then(function (r) {
+					var ret = {};
+					var c = 0;
+					console.log(r);
+					
+					for (var i in r) {
+						if (!r.hasOwnProperty(i)) { continue; }
+						if (c > 5) { continue; }
+						ret[r[i].resource] = r[i].name;
+						c++;
+					}
+					output(ret);
+				});
+			});
+			
+			document.getElementById('country-submit').addEventListener('click', function () {
+				request(api + '/itinerary/test.json?hl=' + document.querySelector('#language').value, {
+					people: [{name: 'Test', documents: [document.querySelector('.autocomplete-passport').value]}],
+					stops: [{country: document.querySelector('.autocomplete-target').value, reason: document.querySelector('#reason').value}]
+				})
+					.then(function (e) { document.getElementById('output').innerHTML = e; return e;})
+					.then(JSON.parse)
+					.then(function (r) {
+						var recs = document.querySelector('#vg-recommendations');
+						recs.innerHTML = '';
+						
+						for (var i = 0; i < r.payload.length; i++) {
+							recs.appendChild(document.createElement('div')).innerHTML = r.payload[i].name;
+							
+							for (var j in r.payload[i].stops) {
+								if (!r.payload[i].stops.hasOwnProperty(j)) { continue; }
+								recs.appendChild(document.createElement('div')).innerHTML = j;
+								
+								for (var k = 0; k < r.payload[i].stops[j].candidates.length; k++) {
+									console.log(r.payload[i].stops[j].candidates[k]);
+									var e = recs.appendChild(document.createElement('a'));
+									e.href = r.payload[i].stops[j].candidates[k][0].product.url;
+									e.style.display = 'block';
+									e.innerHTML = r.payload[i].stops[j].candidates[k][0].name + (r.payload[i].stops[j].candidates[k][0].product.price.amt / 100);
+								}
+							}
+						}
+						console.log(r);
+					});
+			}, false);
 		});
 		</script>
 		
