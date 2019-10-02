@@ -1,0 +1,52 @@
+
+<div data-lysine-view="multiple-people">
+	<div class="passenger" data-lysine-view data-for="passengers">
+		<div class="spacer" style="height: .35rem"></div>
+		
+		<div class="row l8 s4">
+			<div class="span l1 desktop-only" style="text-align: center;">
+				<img data-lysine-src="{{flag}}" style="height: 24px; border-radius: 50%; box-shadow: 0 0 3px #CCC;">
+			</div>
+			<div class="span l3 s1">
+				<input type="text" style="border: none; font-family: inherit; padding:0 " data-for="name">
+			</div>
+			<div class="span l3 s2" style="white-space: nowrap; overflow: hidden">
+				<span data-for="country"></span>
+			</div>
+			<div class="span l1 s1" style="font-weight: bold; text-align: center;">
+				<a href="#add-person" class="remove">&times;</a>
+			</div>
+		</div>
+		<div class="spacer" style="height: .20rem"></div>
+	</div>
+	
+	<div class="row l8 s4 ng" id="passenger-form">
+		<div class="span l1 desktop-only">
+			<div class="padding-correction" style="padding: .4rem; text-align: center">
+				<img src="assets/img/person.png" width="32" style="width: 32px" alt="Airplane" />
+			</div>
+		</div>
+		<div class="span l3 s1">
+			<input type="text" id="passenger-name" name="name" class="frm-ctrl" placeholder="Passagier name" style="padding-left: 0;">
+		</div>
+		<div class="span l3 s2">
+			<input type="hidden" class="frm-ctrl autocomplete-passport" name="passport" data-placeholder="Staatsangehoerigkeit">
+		</div>
+		<div class="span l1 s1" style="text-align: center">
+			<a href="#add-person" id="add-person" style="padding: .75rem 0; display: inline-block">OK</a>
+		</div>
+	</div>
+	
+	
+	
+	<div id="passenger-new" style="color: #01b1d7; background: #FFFFFF; display: none; cursor: pointer; font-weight: bolder; padding-top: .5rem; padding-bottom: .5rem;">
+		<div class="row l8 s4 ng">
+			<div class="span l1 s1 not-mobile" style="text-align: center;">
+				<span style="text-align: center; background: #01b1d7; color: #FFFFFF; border-radius: 50%; display: inline-block; height: 1rem; width: 1rem; line-height: .9rem;">+</span>
+			</div>
+			<div class="span l7 s3">
+				Weiterer Passagier
+			</div>
+		</div>
+	</div>
+</div>

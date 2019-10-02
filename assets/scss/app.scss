@@ -8,10 +8,25 @@ and open the template in the editor.
     Author     : César de la Cal Bretschneider <cesar@magic3w.com>
 */
 
+@import "_/_.scss";
 
-* {
-	box-sizing: border-box;
-	font-family: system-ui, sans;
+.frm-ctrl {
+	border: none;
+}
+
+input[type="text"] {
+	&:focus, &:active {
+		box-shadow: none;
+		border: none;
+	}
+}
+
+.span {
+	overflow-x: visible;
+}
+
+.autocomplete-input {
+	font-weight: bolder;
 }
 
 .autocomplete-input {
@@ -27,9 +42,9 @@ and open the template in the editor.
 .autocomplete-results {
 	position: absolute;
 	width: 100%;
-	border: solid 1px #CCC;
+	box-shadow: 0 0 3px rgba(0, 0, 0, .3);
 	border-radius: 5px;
-	padding: .3rem 0;
+	padding: 0;
 	top: 10px;
 	z-index: 5;
 	background: #FFF;
@@ -43,13 +58,15 @@ and open the template in the editor.
 	white-space: nowrap;
 	color: #555;
 	padding: .5rem .9rem;
-	font-size: .8rem;
+	font-size: .9rem;
 	cursor: pointer;
-}
-
-.autocomplete-results .autocomplete-result:hover {
-	color: #FFF;
-	background-color: #44a5eb;
+	border-radius: 5px;
+	overflow: hidden;
+	
+	&.active, &:hover {
+		color: #FFF;
+		background-color: #44a5eb;
+	}
 }
 
 
@@ -67,15 +84,23 @@ body, html{
 
 .wrapper {
 	margin: 0 auto;
-	width: 97%;
+	width: 100%;
 	max-width: 30rem;
 	border-radius: 3px;
+	background: #FFF;
 	box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+	
+	&.transparent {
+		box-shadow: none;
+		background: transparent;
+	}
 }
 
 #map {
 	position: relative;
 	overflow: hidden;
+	border-radius: 3px;
+	box-shadow: 0 0 2px #CCC;
 }
 
 #map img {
@@ -87,16 +112,22 @@ body, html{
 	background: rgba(255, 255, 255, 0.95);
 	margin: 0 auto;
 	padding: 1.3rem;
-	overflow: hidden;
 	transition: height .7s ease, padding .7s ease;
 }
 
 .discovery-form-header {
 	position: absolute;
-	top: 85%;
-	left: 5%;
+	top: 15%;
+	left: .3rem;
 	transition: top .7s ease, left .7s ease;
 	white-space: nowrap;
+	
+	animation: .6s grow;
+}
+
+@keyframes grow {
+	  0% { opacity: 0; }
+	100% { opacity: 1; }
 }
 
 .dot {
@@ -134,25 +165,28 @@ body, html{
 	display: block;
 }
 
+#reason {
+	font-weight: bold;
+	color: #888;
+}
+
 a {
 	color: #48aeff;
 	text-decoration: none;
 }
 
-select, input[type="text"] {
+input[type="text"] {
 	font-family: inherit;
 	display: block;
 	-moz-appearance: none;
 	appearance: none;
-	padding: .3rem .7rem;
+	padding: .75rem .4rem;
 	height: auto;
 	width: 100%;
-	border: solid 1px #48aeff;
-	color: #48aeff;
+	border: none;
+	color: #444;
 	background-color: #FFF;
 	font-size: 1rem;
-	line-height: 2.2rem;
-	height: 2.2rem;
 }
 
 input[type="submit"] {
@@ -229,23 +263,6 @@ input[type="submit"] {
 	padding: .5rem .8rem;}
 }
 
-#target-country {
-	height: 525px;
-	transition: height .7s ease;
-}
-
-#target-country.collapsed {
-	overflow: hidden;
-	height: 150px;
-	border-radius: 3px;
-}
-
-#nationality, #visa-results {
-	overflow: hidden;
-	height: 0px;
-	transition: height .7s ease;
-}
-
 .passport-img-wrapper {
 	max-height: 120px;
 	overflow: hidden;
@@ -256,8 +273,8 @@ input[type="submit"] {
 	height: auto;
 }
 
-#target-country.collapsed #target-country-form {
-
+#target-country-form {
+	//border-bottom: solid 1px #206596;
 }
 
 .visa-result {
@@ -270,7 +287,8 @@ input[type="submit"] {
 }
 
 .buy-now {
-	float: right;
+	display: inline-block;
+	text-align: right;
 	border: solid 1px #48aeff;
 	background: #48aeff;
 	color: #FFF;
@@ -288,14 +306,16 @@ input[type="submit"] {
 
 .visa-result .title {
 	display: block;
+	font-size: .95rem;
 	font-weight: bold;
-	color: #333;
+	color: #555;
 }
 
 .visa-result .description {
 	display: block;
 	color: #555;
 	font-size: .8rem;
+	padding: .3rem 0;
 }
 
 .separator {
@@ -306,16 +326,9 @@ input[type="submit"] {
 .considerations {
 	padding: 0.3rem 0 .3rem 1rem;
 	transition: opacity .7s;
-	opacity: .7;
 }
-
-.considerations:hover {
-	opacity: 1;
-}
-
 
 .consideration .icon {
-	float: left;
 	width: 32px;
 	margin: .7rem;
 }
@@ -329,6 +342,24 @@ input[type="submit"] {
 	display: block;
 	color: #555;
 	font-size: .8rem;
+	overflow: hidden;
+	cursor: pointer;
+	
+	&.limited {
+		max-height: 80px;
+		position: relative;
+		
+		&:after {
+			content: 'Mehr anzeigen';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			text-align: center;
+			color: #0eadd7;
+			background: #FAFAFA;
+		}
+	}
 }
 
 .consideration:after {
@@ -393,6 +424,53 @@ h2 {
 	color: #888;
 	font-size: 1.2rem;
 	max-width: 30rem;
-	margin: 1rem auto;
+	margin: .3rem auto;
+	padding: 0 1rem;
 }
 
+h3 {
+	color: #999;
+	font-size: 1rem;
+	margin: .3rem 0 0;
+}
+
+p {
+	padding: 0 1rem;
+	line-height: 1.5em;
+}
+
+.info-message {
+	padding: 1.5rem;
+	background-color: #eef9fb;
+	color: #0eadd7;
+	position: relative;
+	
+	&:before {
+		position: absolute;
+		bottom: 100%;
+		left: 20px;
+		content: '';
+		height: 0;
+		width: 0;
+		border-style: none solid solid solid;
+		border-color: transparent transparent #eef9fb transparent;
+		border-width: 14px;
+	}
+}
+
+.highlight {
+	font-weight: bold;
+}
+
+.secondary {
+	font-size: .9rem;
+	color: #555;
+}
+
+input[type=text] {
+	padding-right: 30px;
+	background-image: url('../img/edit.png');
+	background-repeat: no-repeat;
+	background-position: center right 4px;
+	background-size: 16px 16px;
+}

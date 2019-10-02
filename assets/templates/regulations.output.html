@@ -1,0 +1,48 @@
+	
+<div data-lysine-view="regulation">
+	
+	<div data-condition="count(regulations)!= 0"  style="background: #FAFAFA; border-bottom: solid 1px #CCC;">
+		
+		<div class="spacer" style="height: 10px"></div>
+		<h2 style="text-align: center;">✔️ Deine Checkliste</h2>
+		<div data-lysine-view data-for="regulations">
+			<div class="spacer" style="height: 10px"></div>
+			<div class="wrapper transparent">
+				<div class="visa-result">
+					<span class="title" data-for="country.name">Land</span>
+				</div>
+
+				<div class="considerations">
+					<div data-lysine-view data-for="considerations" class="consideration">
+						<div class="row l7 s4">
+							<div class="span l1 s1" style="text-align: right">
+								<img class="icon" src="assets/img/considerations/health.png" data-lysine-src="{{icon}}">
+							</div>
+							<div class="span l6 s3">
+								<span class="caption" data-for="headline">Gelbfieber Impfung</span>
+								<span class="description" data-for="msg" style="white-space: pre-wrap">Wenn sie aus einem Land mit Gelbfieber kommen</span>
+							</div>
+						</div>
+						<div class="spacer" style="height: 10px"></div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="spacer" style="height: 10px"></div>
+		</div>
+	</div>
+	
+	<div data-condition="count(regulations) == 0" style="padding: 10px">
+		<h2>Brauchst du hilfe?</h2>
+		<p class="secondary">
+			Willkommen bei unserem Visaexperten! Wir sagen dir im Handumdrehen ob du
+			ein Visum brauchst. Starte einfach damit das Land in das du reisen willst
+			auszusuchen.
+		</p>
+		
+		<p class="secondary">
+			Falls du weitere hilfe brauchst, kontaktiere unseren Support unter der
+			kostenlosen hotline: <strong>0800 84724283</strong>
+		</p>
+	</div>
+</div>
