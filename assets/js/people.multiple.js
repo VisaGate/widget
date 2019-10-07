@@ -25,8 +25,12 @@ depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'aut
 
 								for (var i in r) {
 									if (!r.hasOwnProperty(i)) { continue; }
+									if (r[i].type !== 'passport') { continue; }
 									if (c > 5) { continue; }
-									ret.push(entry(r[i].name, r[i].resource, {name: r[i].name }));
+									
+									var display = r[i].name.match(/Pass \([^\)]+\)/)? r[i].name.substr(6, r[i].name.length - 7) : r[i].name;
+									
+									ret.push(entry(display, r[i].resource, {name: display }));
 									c++;
 								}
 								output(ret);

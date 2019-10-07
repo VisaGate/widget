@@ -131,7 +131,10 @@
 					var stops = input[0];
 					var isos = collect(stops).each(function (e) { return e.ISO; } ).raw();
 
-					if (isos.length === 0) { return; }
+					if (isos.length === 0) { 
+						output({});
+						return; 
+					}
 
 					request(api + '/country/regulations/' + isos.join(':') + '.json')
 						.then(JSON.parse)

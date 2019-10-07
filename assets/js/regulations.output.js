@@ -17,6 +17,13 @@ depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'aut
 						view.setData({});
 						
 						view.on('.description', 'click', function (e, v) {
+							var self = this;
+							
+							view.findAll('.description:not(.limited)').forEach(function (e) {
+								if (e === self) { return; }
+								if (e.clientHeight > 75) { e.classList.add('limited'); }
+							});
+								
 							this.classList.toggle('limited');
 						});
 
@@ -30,10 +37,11 @@ depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'aut
 							//view.setData({passengers: input[0]});
 							try {
 								view.setData(input[0]);
+								
 								view.findAll('.description').forEach(function (e) {
 									if (e.clientHeight > 75) { e.classList.add('limited'); }
 									else { e.classList.remove('limited'); }
-								})
+								});
 							}catch (e) {console.log(e);}
 						});
 						

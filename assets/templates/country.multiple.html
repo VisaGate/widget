@@ -3,18 +3,26 @@
 	<!-- The stops element contains the previous stops the user wishes to make-->
 	<div id="stops">
 		<div class="stop" data-lysine-view data-for="stops">
-			<input type="hidden" class="target" data-for="ISO" >
-			<input type="hidden" class="reason" data-for="reason">
-			<span class="dot"></span>
-			<span class="caption" data-for="name">Country</span>
-			<span class="reason" data-for="reason" style="color: #777; background: #CCC; border-radius: 4px; display: inline-block; padding: .1rem .3rem; font-size: .8em">Reason</span>
-			<span class="remove">&times;</span>
+			<div class="row s3 l8 ng">
+				<input type="hidden" class="target" data-for="ISO" >
+				<input type="hidden" class="reason" data-for="reason">
+				<div class="span s1 l1" style="text-align: center">
+					<span class="dot"></span>
+				</div>
+				<div class="span s2 l6">
+					<span class="caption" data-for="name">Country</span>
+					<span class="reason" data-for="reason" style="color: #777; background: #CCC; border-radius: 4px; display: inline-block; padding: .1rem .3rem; font-size: .8em">Reason</span>
+				</div>
+				<div class="span s1 l1" style="font-weight: bold; text-align: center;">
+					<a class="remove" >&times;</a>
+				</div> 
+			</div>
 		</div>
 	</div>
 	
 	<form id="target-country-form" >
-		<div class="row s2 l8 ng">
-			<div class="span l1 not-mobile">
+		<div class="row s3 l8">
+			<div class="span l1 desktop-only">
 				<div class="padding-correction" style="padding: .4rem; text-align: center">
 					<img src="assets/img/plane.png" width="32" style="width: 32px" alt="Airplane" />
 				</div>
@@ -22,12 +30,17 @@
 			<div class="span s1 l3">
 				<input type="hidden" name="country" class="autocomplete-target target" id="target" data-placeholder="Ihr Zielland">
 			</div>
-			<div class="span s1 l4">
+			<div class="span s1 l3">
 				<select id="reason" class="frm-ctrl reason">
 					<option value="tourist">Tourist / Urlauber</option>
 					<option value="business">Business</option>
 					<option value="student">Student</option>
 				</select>
+			</div> 
+			<div class="span s1 l1" style="font-weight: bold; text-align: center;">
+				<div style="padding: .65rem 0; cursor: pointer;">
+					<a class="remove" id="reset-target">&times;</a>
+				</div>
 			</div> 
 		</div>
 

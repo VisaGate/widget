@@ -78,6 +78,12 @@ depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promise
 							s.push({name: input.dataset.name, ISO: input.value, lat: input.dataset.lat, lon: input.dataset.lon, reason: view.find('#reason').value });
 							output(s);
 						});
+						
+						view.find('#reset-target').addEventListener('click', function () {
+							ac.empty();
+							var s = view.get('stops').slice(0);
+							output(s);
+						});
 
 						view.sub('stops').on('.remove', 'click', function (e, v) {
 							v.destroy();
