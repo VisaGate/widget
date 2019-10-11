@@ -10,14 +10,26 @@
 		
 	</head>
 	<body>
-		<div class="spacer" style="height: 50px"></div>
-		<div style="text-align: center">
-			<!--<img src="https://www.visa-gate.com/sites/default/files/logo_check24.png">-->
-			<img src="https://www.visa-gate.com/sites/default/files/imgo.jpg" style="height: 80px">
-		</div>
 		<div class="spacer" style="height: 30px"></div>
+		
+		<div style="text-align: center">
+			<img src="https://www.visa-gate.com/sites/default/files/imgo.jpg" id="logo" style="height: 120px">
+		</div>
+		
+		<div class="spacer" style="height: 50px"></div>
 		
 		<div id="visa-gate-widget"><a href="https://visa-gate.com/">Powered by Visa-Gate</a></div>
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+		
+		<script type="text/javascript">(function() {
+			var fn = function() {
+				var fragment = document.location.hash.substr(1);
+				var logo = document.getElementById('logo');
+				if (fragment) { logo.src = 'partners/' + fragment + '.png'; }
+				return fn;
+			};
+			
+			window.onhashchange = fn();
+		}());</script>
 	</body>
 </html>

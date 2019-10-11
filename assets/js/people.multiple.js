@@ -37,6 +37,10 @@ depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'aut
 							})
 							.catch(console.log);
 						});
+						
+						view.find('.autocomplete-passport').addEventListener('change', function () {
+							view.find('.button').classList[this.value? 'remove' : 'add']('disabled');
+						});
 
 						/*
 						 * Initialize the autocomplete system.

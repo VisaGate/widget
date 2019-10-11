@@ -92,6 +92,7 @@ depend(['m3/core/collection'], function (collect) {
 			this.element.value = '';
 			this.dummy.value = '';
 			this.reset();
+			this.element.dispatchEvent(new Event('change', {'bubbles': false, 'cancelable': true}));
 		};
 
 		this.dummy.addEventListener('focus', function (e) {

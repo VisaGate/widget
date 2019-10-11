@@ -57,6 +57,7 @@ input[type="text"], select {
 .autocomplete-results {
 	position: absolute;
 	width: 100%;
+	min-width: 350px;
 	box-shadow: 0 0 3px rgba(0, 0, 0, .3);
 	border-radius: 5px;
 	padding: 0;
@@ -291,11 +292,17 @@ input[type="submit"] {
 	border-radius: 3px;
 	font-weight: bold;
 	cursor: pointer;
+	transition: background-color .5s ease;
 	
 	&.fixed-height {
 		height: 2.6rem;
 		padding: .8rem .7rem;
 		line-height: 1.2rem;
+	}
+	
+	&.disabled {
+		background-color: #CCC;
+		border: solid 1px #bbb;
 	}
 }
 

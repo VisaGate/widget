@@ -1,9 +1,0 @@
-{
-	"linters" : {
-		"phpcs": {
-			"type" : "phpcs",
-			"include" : "(\\.php$)",
-			"phpcs.standard" : "./ruleset.xml"
-		}
-	}
-}

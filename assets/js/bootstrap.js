@@ -97,13 +97,20 @@
 						document.getElementById('output').style.display = 'none';
 					}
 
-					if (_ret.stops.length > 0) {
+					if (_ret.stops.length > 0 && _ret.people.length > 0) {
 						document.getElementById('country-error').style.display = 'none';
+						document.getElementById('passenger-error').style.display = 'none';
 						document.getElementById('add-stop').style.display = 'block';
+					}
+					else if (_ret.stops.length > 0 && _ret.people.length === 0) {
+						document.getElementById('country-error').style.display = 'none';
+						document.getElementById('passenger-error').style.display = 'block';
+						document.getElementById('add-stop').style.display = 'none';
 					}
 					else {
 						document.getElementById('add-stop').style.display = 'none';
 						document.getElementById('country-error').style.display = 'block';
+						document.getElementById('passenger-error').style.display = 'none';
 					}
 				});
 
