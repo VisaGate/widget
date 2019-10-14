@@ -9,6 +9,7 @@ and open the template in the editor.
 */
 
 @import "_/_.scss";
+@import "_autocomplete.scss";
 
 .frm-ctrl {
 	border: none;
@@ -29,6 +30,26 @@ input[type="text"], select {
 	font-family: inherit;
 }
 
+.faux-field {
+	border: solid 1px #FAFAFA;
+	background: #FAFAFA;
+	color: #555;
+	border-radius: 3px;
+	font-size: .8rem !important;
+	line-height: 1.2rem;
+	height: 2.6rem;
+	font-family: inherit;
+	display: inline-block;
+	font-family: inherit;
+	display: block;
+	-moz-appearance: none;
+	appearance: none;
+	padding: .75rem .4rem;
+	width: 100%;
+	font-weight: bold;
+	font-size: 1rem;
+}
+
 .padding-correction {
 	padding: .8rem;
 	line-height: 1.2rem;
@@ -36,53 +57,12 @@ input[type="text"], select {
 	font-family: inherit;
 }
 
+.row {
+	max-width: 95%;
+}
+
 .span {
 	overflow-x: visible;
-}
-
-.autocomplete-input {
-	font-weight: bolder;
-}
-
-.autocomplete-input {
-	width: 100%;
-
-}
-
-.autocomplete-results-anchor {
-	position: relative;
-	width: 100%;
-}
-
-.autocomplete-results {
-	position: absolute;
-	width: 100%;
-	min-width: 350px;
-	box-shadow: 0 0 3px rgba(0, 0, 0, .3);
-	border-radius: 5px;
-	padding: 0;
-	top: 10px;
-	z-index: 5;
-	background: #FFF;
-}
-
-.autocomplete-results.autocomplete-hidden {
-	display: none;
-}
-
-.autocomplete-results .autocomplete-result {
-	white-space: nowrap;
-	color: #555;
-	padding: .5rem .9rem;
-	font-size: .8rem;
-	cursor: pointer;
-	border-radius: 5px;
-	overflow: hidden;
-	
-	&.active, &:hover {
-		color: #FFF;
-		background-color: #44a5eb;
-	}
 }
 
 
@@ -237,21 +217,6 @@ input[type="submit"] {
 	box-shadow: 0 0 3px rgba(0, 0, 0, .3);
 }
 
-.stop:before {
-	content: '';
-	position: absolute;
-	width: 3px;
-	height: calc(100% + 0.8rem);
-	background-color: #CCC;
-	top: 0rem;
-	left: 1.6rem;
-	z-index: 0;
-}
-
-.stop:first-child:before {
-	top: .9rem;
-}
-
 @keyframes stoppopup {
 	0% { height: 0rem; background-color: #FFF; padding: 0 0rem;}
 	50% { background-color: #F99; }
@@ -297,7 +262,7 @@ input[type="submit"] {
 	&.fixed-height {
 		height: 2.6rem;
 		padding: .8rem .7rem;
-		line-height: 1.2rem;
+		line-height: 1.0rem;
 	}
 	
 	&.disabled {
@@ -320,6 +285,9 @@ input[type="submit"] {
 }
 
 .visa-result .description {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 	display: block;
 	color: #555;
 	font-size: .8rem;
@@ -328,6 +296,14 @@ input[type="submit"] {
 
 .separator {
 	border-top: solid 1px #CCC;
+	
+	&.dashed {
+		border-top-style: dashed;
+	}
+	
+	&.dotted {
+		border-top-style: dashed;
+	}
 }
 
 
@@ -481,4 +457,8 @@ input[type=text] {
 	background-repeat: no-repeat;
 	background-position: center right 4px;
 	background-size: 16px 16px;
+}
+
+.clickable {
+	cursor: pointer;
 }

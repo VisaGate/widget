@@ -6,10 +6,13 @@
 
 
 depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'autocomplete'], function (request, Lysine, Promise, pipe, autocomplete) {
+	
+	var assetsURL = document.querySelector('meta[name="vg.assets"]').content;
+	
 	return {
 		init : function (parent, api) { 
 			return new Promise(function (success, failure) {
-				request('assets/templates/visa.output.html')
+				request(assetsURL + '/templates/visa.output.html')
 					.then(function (response) {
 						parent.innerHTML = response;
 

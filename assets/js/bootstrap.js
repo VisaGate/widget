@@ -40,7 +40,7 @@
 	var init = function () {
 		
 		depend(['m3/depend/router'], function(router) {
-			var location = document.querySelector('meta[name="_scss"]').getAttribute('content') || baseURL + '/scss/_/js/';
+			var location = document.querySelector('meta[name="_scss"]').getAttribute('content') || (baseURL + '/scss/_/js/');
 			router.all().to(function(e) { return baseURL + '/js/' + e + '.js'; });
 			router.equals('_scss').to( function() { return location + '_.scss.js'; });
 
@@ -102,15 +102,15 @@
 						document.getElementById('passenger-error').style.display = 'none';
 						document.getElementById('add-stop').style.display = 'block';
 					}
-					else if (_ret.stops.length > 0 && _ret.people.length === 0) {
-						document.getElementById('country-error').style.display = 'none';
-						document.getElementById('passenger-error').style.display = 'block';
-						document.getElementById('add-stop').style.display = 'none';
-					}
-					else {
+					else if (_ret.people.length > 0 && _ret.stops.length === 0) {
 						document.getElementById('add-stop').style.display = 'none';
 						document.getElementById('country-error').style.display = 'block';
 						document.getElementById('passenger-error').style.display = 'none';
+					}
+					else {
+						document.getElementById('country-error').style.display = 'none';
+						document.getElementById('passenger-error').style.display = 'block';
+						document.getElementById('add-stop').style.display = 'none';
 					}
 				});
 

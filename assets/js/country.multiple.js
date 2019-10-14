@@ -7,10 +7,12 @@
 
 depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promises/promise'], function (request, Lysine, pipe, autocomplete, Promise) {
 	
+	var assetsURL = document.querySelector('meta[name="vg.assets"]').content;
+	
 	return {
 		init : function (parent, api) {
 			return new Promise(function (success, error) {
-				request('assets/templates/country.multiple.html')
+				request(assetsURL + '/templates/country.multiple.html')
 				.then(function (response) {
 					parent.innerHTML = response;
 
@@ -40,7 +42,7 @@ depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promise
 
 					var p = pipe(function (input, output) {
 						console.log('Woke up input pipe');
-						view.on('#add-stop', 'click', function (el, e) {
+						view.on('#commit-stop', 'click', function (el, e) {
 							var input = view.find('.autocomplete-target');
 							var data = view.get('stops');
 							
@@ -54,35 +56,18 @@ depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promise
 
 							ac.empty();
 							el.preventDefault();
-						});
-
-
-						view.find('#target').addEventListener('change', function () {
-							console.log('Change detected');
-							var s = view.get('stops').slice(0);
-							var input = view.find('.autocomplete-target');
 							
-							if (input.value) {
-								s.push({name: input.dataset.name, ISO: input.value, lat: input.dataset.lat, lon: input.dataset.lon, reason: view.find('#reason').value });
-							}
-							
-							output(s);
-						});
-
-
-						view.find('#reason').addEventListener('change', function () {
-							console.log('Change detected');
-							var s = view.get('stops').slice(0);
-							var input = view.find('.autocomplete-target');
-							console.log(s);
-							s.push({name: input.dataset.name, ISO: input.value, lat: input.dataset.lat, lon: input.dataset.lon, reason: view.find('#reason').value });
-							output(s);
+							view.find('#target-country-form').style.display = 'none';
+							view.find('#add-stop').style.display = 'block';
 						});
 						
-						view.find('#reset-target').addEventListener('click', function () {
-							ac.empty();
-							var s = view.get('stops').slice(0);
-							output(s);
+						view.find('#add-stop').addEventListener('click', function () {
+							view.find('#target-country-form').style.display = 'block';
+							view.find('#add-stop').style.display = 'none';
+						});
+						
+						view.find('.autocomplete-target').addEventListener('change', function () {
+							view.find('#commit-stop').classList[view.find('.autocomplete-target').value? 'remove' : 'add']('disabled');
 						});
 
 						view.sub('stops').on('.remove', 'click', function (e, v) {

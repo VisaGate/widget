@@ -1,45 +1,46 @@
 
 <div data-lysine-view="multiple-people">
 	<div class="passenger" data-lysine-view data-for="passengers">
-		<div class="spacer" style="height: .35rem"></div>
 		
-		<div class="row l8 s4">
-			<div class="span l1 desktop-only" style="text-align: center;">
+		<div class="row l8 s5">
+			<div class="span l1 s1" style="font-weight: bold; text-align: center;">
 				<div class=" padding-correction">
-					<img data-lysine-src="{{flag}}" style="height: 18px; border-radius: 50%; box-shadow: 0 0 3px #CCC;">
+					<img data-lysine-src="{{flag}}" style="height: 18px; border-radius: 50%; box-shadow: 0 0 3px #CCC; vertical-align: middle;">
 				</div>
 			</div>
-			<div class="span l3 s1">
-				<input type="text" data-for="name">
-			</div>
-			<div class="span l3 s2" style="white-space: nowrap; overflow: hidden">
-				<div class=" padding-correction">
-					<span data-for="country"></span>	
+			<div class="span l6 s3">
+				<div class="padding-correction" style="padding-left: 0;">
+					<span  data-for="name"></span>
+					<span data-for="country" class="desktop-only" style="color: #777; background: #CCC; border-radius: 4px; display: inline-block; padding: .1rem .3rem; font-size: .8em"></span>	
 				</div>
 			</div>
 			<div class="span l1 s1" style="font-weight: bold; text-align: center;">
 				<div class=" padding-correction">
-					<a class="remove">&times;</a>
+					<a class="remove clickable">&times;</a>
 				</div>
 			</div>
 		</div>
-		<div class="spacer" style="height: .20rem"></div>
+		
+		<div class="spacer" style="height: 10px"></div>
+		<div class="separator dashed"></div>
+		<div class="spacer" style="height: 10px"></div>
 	</div>
 	
-	<div class="row l8 s4" id="passenger-form">
+	
+	<div class="row l8" id="passenger-form">
 		<div class="span l1 desktop-only">
 			<div class="padding-correction" style="padding: .4rem; text-align: center">
 				<img src="assets/img/person.png" width="32" style="width: 32px" alt="Airplane" />
 			</div>
 		</div>
-		<div class="span l3 s1">
-			<input type="text" id="passenger-name" name="name" class="frm-ctrl" placeholder="Passagier name" >
+		<div class="span l3">
+			<input type="text" id="passenger-name" name="name" class="frm-ctrl" placeholder="Passagier Name" >
 		</div>
-		<div class="span l3 s2">
-			<input type="hidden" class="frm-ctrl autocomplete-passport" name="passport" data-placeholder="Staatsangehoerigkeit">
+		<div class="span l3">
+			<input type="hidden" class="frm-ctrl autocomplete-passport" name="passport" data-placeholder="Staatsangeh&ouml;rigkeit">
 		</div>
 		<div class="span l1 s1" style="text-align: center">
-			<a class="button fixed-height disabled" id="add-person">OK</a>
+			<a class="button fixed-height disabled" id="add-person" style="width: 100%; text-align: center;">OK</a>
 		</div>
 	</div>
 	

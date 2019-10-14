@@ -17,8 +17,7 @@
 						<div data-condition="bool(granted) == false">
 							<div class="row l1">
 								<div class="span l1" style="font-size: .6rem; color: #777">
-									In diesem Fall hast du mehrere optionen, such dir das 
-									Visum aus das am besten zu deiner Reise passt.
+									Bitte wählen Sie das passende Visum aus.
 									
 									<div class="spacer" style="height: 20px"></div>
 								</div>
@@ -28,7 +27,7 @@
 				</div>
 				<form>
 					<div data-lysine-view data-for="candidates">
-						<div class="row s4 l4 product" data-lysine-view data-for="documents">
+						<div class="row s5 l4 product" data-lysine-view data-for="documents">
 							<div class="span s3 l3" data-condition="null(product) == false">
 								<label  class="description">
 									<input type="radio" name="document" class="frm-ctrl" data-lysine-data-product="{{product.id}}" >
@@ -37,7 +36,7 @@
 									<span data-for="name" data-lysine-class="{{recommended?highlight:secondary}}"></span>
 								</label>
 							</div>
-							<div class="span s1 l1" data-condition="null(product) == false" style="text-align: right;">
+							<div class="span s2 l1" data-condition="null(product) == false" style="text-align: right;">
 								<a class="buy-now" data-lysine-href="{{product.url}}"><span data-for="product.price.natural"></span> €</a>
 							</div>
 						</div>

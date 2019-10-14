@@ -18,4 +18,3 @@ remove:
 	-rm -R sass
 	-rm -R dart-sass
 	-rm -R src
-	-rm -R bin
