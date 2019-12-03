@@ -49,8 +49,8 @@
 			});
 		});
 		depend(
-			['country.multiple', 'people.multiple', 'visa.output', 'regulations.output', 'map', 'pipe', 'm3/promises/promise', 'm3/core/request', 'm3/core/collection'], 
-			function (target, people, visa, regout, map, pipe, Promise, request, collect) {
+			['country.multiple', 'people.multiple', 'visa.output', 'visa.output.export', 'regulations.output', 'map', 'pipe', 'm3/promises/promise', 'm3/core/request', 'm3/core/collection'], 
+			function (target, people, visa, modExport, regout, map, pipe, Promise, request, collect) {
 
 			var api = document.querySelector('meta[name="vg.api"]').content;
 			var targets = undefined;
@@ -58,6 +58,7 @@
 			var peopleP = undefined;
 			var regoutP = undefined;
 			var mapoutP = undefined;
+			var exportP = undefined;
 
 			var main = function () {
 
@@ -92,9 +93,11 @@
 					if (_ret.people.length > 0 && _ret.stops.length > 0) {
 						output(_ret);
 						document.getElementById('output').style.display = 'block';
+						document.getElementById('export').style.display = 'block';
 					}
 					else {
 						document.getElementById('output').style.display = 'none';
+						document.getElementById('export').style.display = 'none';
 					}
 
 					if (_ret.stops.length > 0 && _ret.people.length > 0) {
@@ -106,11 +109,13 @@
 						document.getElementById('add-stop').style.display = 'none';
 						document.getElementById('country-error').style.display = 'block';
 						document.getElementById('passenger-error').style.display = 'none';
+						document.getElementById('step2').style.display = 'block';
 					}
 					else {
 						document.getElementById('country-error').style.display = 'none';
 						document.getElementById('passenger-error').style.display = 'block';
 						document.getElementById('add-stop').style.display = 'none';
+						document.getElementById('step2').style.display = 'none';
 					}
 				});
 
@@ -156,6 +161,7 @@
 
 				validation.receive([targets, peopleP]);
 				apiCall.receive([validation]);
+				exportP.receive([validation]);
 				visaOut.receive([apiCall]);
 				regulations.receive([targets]);
 				regoutP.receive([regulations]);
@@ -169,7 +175,8 @@
 				.then(function (p) { targets = p; return visa.init(document.getElementById('output'), api); })
 				.then(function (p) { visaOut = p; return map.init(document.getElementById('map'), api); })
 				.then(function (p) { mapoutP = p; return regout.init(document.getElementById('regulations'), api); })
-				.then(function (p) { regoutP = p; main(); console.log('Success'); });
+				.then(function (p) { regoutP = p; return modExport.init(document.getElementById('export'), 'http://192.168.100.97/VG-PDF-Export/'); })
+				.then(function (p) { exportP = p; main(); console.log('Success'); });
 	 
 			loadCSS(baseURL + '/css/app.css');
 		});

@@ -8,40 +8,45 @@
 			Visumpflicht besteht.
 		</p>
 		
-		<div class="spacer" style="height: 20px"></div>
-		
-		<h2 style="padding-left: .3rem;">Personen</h2>
-		<div class="wrapper">
-			<div class="spacer" style="height: 4px"></div>
-			<div id="passports"></div>
-			<div class="spacer" style="height: 8px"></div>
-		</div>
-		<div class="wrapper transparent" id="passenger-error">
-			<div class="spacer" style="height: 10px"></div>
-			<div class="info-message">
-				<strong>Wer soll mitfliegen?</strong> Gib einen Namen (dieser kann auch
-				ein Nickname sein) und wähle deine Staatsangehorigkeit. Bestatige 
-				deine Eingabe dann mit OK.
-			</div>
-		</div>
-		
-		<div class="spacer" style="height: 20px"></div>
-		
-		<h2 style="padding-left: .3rem;">Ziele</h2>
-		<div class="wrapper">
-			<div class="spacer" style="height: 8px"></div>
-			<div id="destination"></div>
+		<div id="step1">
+			<div class="spacer" style="height: 20px"></div>
 
-		</div>
-		<div class="wrapper transparent" id="country-error" style="display: none">
-			<div class="spacer" style="height: 10px"></div>
-			<div class="info-message">
-				<strong>Wohin soll die Reise gehen?</strong> Suche das Zielland aus, 
-				unser Visaexperte hilft dir das richtige Visum zu finden.
+			<h2 style="padding-left: .3rem;">Personen</h2>
+			<div class="wrapper">
+				<div class="spacer" style="height: 4px"></div>
+				<div id="passports"></div>
+				<div class="spacer" style="height: 8px"></div>
+			</div>
+			<div class="wrapper transparent" id="passenger-error">
+				<div class="spacer" style="height: 10px"></div>
+				<div class="info-message">
+					<strong>Wer soll mitfliegen?</strong> Gib einen Namen (dieser kann auch
+					ein Nickname sein) und wähle deine Staatsangehorigkeit. Bestatige 
+					deine Eingabe dann mit OK.
+				</div>
 			</div>
 		</div>
-		<div class="spacer" style="height: 50px"></div>
-		<div id="output" ></div>
+		
+		<div id="step2" style="display: none">
+			<div class="spacer" style="height: 20px"></div>
+
+			<h2 style="padding-left: .3rem;">Ziele</h2>
+			<div class="wrapper">
+				<div class="spacer" style="height: 8px"></div>
+				<div id="destination"></div>
+
+			</div>
+			<div class="wrapper transparent" id="country-error" style="display: none">
+				<div class="spacer" style="height: 10px"></div>
+				<div class="info-message">
+					<strong>Wohin soll die Reise gehen?</strong> Suche das Zielland aus, 
+					unser Visaexperte hilft dir das richtige Visum zu finden.
+				</div>
+			</div>
+			<div class="spacer" style="height: 50px"></div>
+			<div id="output" ></div>
+			<div id="export" ></div>
+		</div>
 	</div>
 	<div class="span l1 desktop-only">
 		<div id="map"></div>

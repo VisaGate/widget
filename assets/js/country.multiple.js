@@ -72,10 +72,6 @@ depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promise
 
 						view.sub('stops').on('.remove', 'click', function (e, v) {
 							v.destroy();
-							var s = view.get('stops').slice(0);
-							var input = view.find('.autocomplete-target');
-							s.push({name: input.dataset.name, ISO: input.value, lat: input.dataset.lat, lon: input.dataset.lon, reason: view.find('#reason').value });
-							output(s);
 						});
 					});
 

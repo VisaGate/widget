@@ -269,6 +269,12 @@ input[type="submit"] {
 		background-color: #CCC;
 		border: solid 1px #bbb;
 	}
+	
+	&.grey {
+		border: solid 1px #DDD;
+		background-color: #EEE;
+		color: #555;
+	}
 }
 
 .visa-result .buy-now.unneeded {

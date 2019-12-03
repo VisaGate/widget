@@ -12,7 +12,7 @@ depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'aut
 	return {
 		init : function (parent, api) { 
 			return new Promise(function (success, failure) {
-				request(assetsURL + 'assets/templates/regulations.output.html')
+				request(assetsURL + '/templates/regulations.output.html')
 					.then(function (response) {
 						parent.innerHTML = response;
 
