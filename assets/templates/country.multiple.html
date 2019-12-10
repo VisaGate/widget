@@ -1,23 +1,26 @@
 
-<div data-lysine-view="country-multiple">
+<template  data-lysine-view="country-multiple">
+<div>
 	<!-- The stops element contains the previous stops the user wishes to make-->
 	<div id="stops">
-		<div class="stop" data-lysine-view data-for="stops">
-			<div class="row s5 l8 ng">
-				<input type="hidden" class="target" data-for="ISO" >
-				<input type="hidden" class="reason" data-for="reason">
-				<div class="span s1 l1" style="text-align: center">
-					<img data-lysine-src="//api.stage.visa-gate.com/image/flag/{{ISO}}" style="height: 18px; border-radius: 50%; box-shadow: 0 0 3px #CCC; vertical-align: middle;">
+		<template  data-lysine-view data-for="stops">
+			<div class="stop">
+				<div class="row s5 l8 ng">
+					<input type="hidden" class="target" data-for="ISO" >
+					<input type="hidden" class="reason" data-for="reason">
+					<div class="span s1 l1" style="text-align: center">
+						<img data-lysine-src="//api.stage.visa-gate.com/image/flag/{{ISO}}" style="height: 18px; border-radius: 50%; box-shadow: 0 0 3px #CCC; vertical-align: middle;">
+					</div>
+					<div class="span s3 l6" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+						<span class="caption" data-for="name">Country</span>
+						<span class="reason" data-for="reason" style="color: #777; background: #CCC; border-radius: 4px; display: inline-block; padding: .1rem .3rem; font-size: .8em">Reason</span>
+					</div>
+					<div class="span s1 l1" style="font-weight: bold; text-align: center;">
+						<a class="remove clickable" >&times;</a>
+					</div> 
 				</div>
-				<div class="span s3 l6" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-					<span class="caption" data-for="name">Country</span>
-					<span class="reason" data-for="reason" style="color: #777; background: #CCC; border-radius: 4px; display: inline-block; padding: .1rem .3rem; font-size: .8em">Reason</span>
-				</div>
-				<div class="span s1 l1" style="font-weight: bold; text-align: center;">
-					<a class="remove clickable" >&times;</a>
-				</div> 
 			</div>
-		</div>
+		</template>
 	</div>
 	
 	<div data-condition="count(stops) != 0">
@@ -63,3 +66,4 @@
 	
 	<div class="spacer" style="height: 10px"></div>
 </div>
+</template>

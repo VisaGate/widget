@@ -1,78 +1,88 @@
 
-<div class="visa wrapper transparent" data-lysine-view="visa-output">
-	<div data-lysine-view data-for="passengers" >
-		<div style="background: linear-gradient(0deg, transparent 14px, #0eadd7 14px, #0eadd7 15px, transparent 15px); text-align: center;">
-			<h2 data-for="name" style="display: inline-block; background: #FFF; line-height: 1.2rem">User A</h2>
-		</div>
-		<div data-lysine-view data-for="stops">
-			<div class="spacer" style="height: 10px"></div>
-			<div class="visa-result">
-				<div class="row l1">
-					<div class="span l1">
-						<span class="title" data-for="country.name"></span>
-					</div>
+<template data-lysine-view="visa-output">
+	<div class="visa wrapper transparent">
+		<template data-lysine-view data-for="passengers">
+			<div >
+				<div style="background: linear-gradient(0deg, transparent 14px, #0eadd7 14px, #0eadd7 15px, transparent 15px); text-align: center;">
+					<h2 data-for="name" style="display: inline-block; background: #FFF; line-height: 1.2rem">User A</h2>
 				</div>
-				<div data-condition="count(candidates) != 0">
-					<div data-condition="count(candidates) != 1">
-						<div data-condition="bool(granted) == false">
+				<template data-lysine-view data-for="stops">
+					<div>
+						<div class="spacer" style="height: 10px"></div>
+						<div class="visa-result">
 							<div class="row l1">
-								<div class="span l1" style="font-size: .6rem; color: #777">
-									Bitte wählen Sie das passende Visum aus.
-									
-									<div class="spacer" style="height: 20px"></div>
+								<div class="span l1">
+									<span class="title" data-for="country.name"></span>
+								</div>
+							</div>
+							<div data-condition="count(candidates) != 0">
+								<div data-condition="count(candidates) != 1">
+									<div data-condition="bool(granted) == false">
+										<div class="row l1">
+											<div class="span l1" style="font-size: .6rem; color: #777">
+												Bitte wählen Sie das passende Visum aus.
+
+												<div class="spacer" style="height: 20px"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<form>
+								<template data-lysine-view data-for="candidates">
+									<div>
+										<template data-lysine-view data-for="documents">
+											<div class="row s5 l4 product">
+												<div class="span s3 l3" data-condition="null(product) == false">
+													<label  class="description">
+														<input type="radio" name="document" class="frm-ctrl" data-lysine-data-product="{{product.id}}" >
+														<span class="frm-ctrl-rad"></span>
+
+														<span data-for="name" data-lysine-class="{{recommended?highlight:secondary}}"></span>
+													</label>
+												</div>
+												<div class="span s2 l1" data-condition="null(product) == false" style="text-align: right;">
+													<a class="buy-now" data-lysine-href="{{product.url}}"><span data-for="product.price.natural"></span> €</a>
+												</div>
+											</div>
+										</template>
+									</div>
+								</template>
+								<input type="hidden" name="selected" value="0">
+							</form>
+
+							<div data-condition="count(candidates) == 0">
+								<div data-condition="bool(granted) == false">
+									<div class="row l1">
+										<div class="span l1" style="font-size: .8rem; color: #777">
+											Kein Visum fuer die Einreise verf&uuml;gbar. Wir koennen ihnen denoch evtl helfen,
+											bitte kontaktieren sie unseren Support.
+										</div>
+									</div>
+								</div>
+								<div data-condition="bool(granted) == true">
+									<div class="row l1">
+										<div class="span l1" style="font-size: .8rem; color: #777">
+											Kein Visum erforderlich.
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<form>
-					<div data-lysine-view data-for="candidates">
-						<div class="row s5 l4 product" data-lysine-view data-for="documents">
-							<div class="span s3 l3" data-condition="null(product) == false">
-								<label  class="description">
-									<input type="radio" name="document" class="frm-ctrl" data-lysine-data-product="{{product.id}}" >
-									<span class="frm-ctrl-rad"></span>
-									
-									<span data-for="name" data-lysine-class="{{recommended?highlight:secondary}}"></span>
-								</label>
-							</div>
-							<div class="span s2 l1" data-condition="null(product) == false" style="text-align: right;">
-								<a class="buy-now" data-lysine-href="{{product.url}}"><span data-for="product.price.natural"></span> €</a>
-							</div>
-						</div>
-					</div>
-					<input type="hidden" name="selected" value="0">
-				</form>
-				
-				<div data-condition="count(candidates) == 0">
-					<div data-condition="bool(granted) == false">
-						<div class="row l1">
-							<div class="span l1" style="font-size: .8rem; color: #777">
-								Kein Visum fuer die Einreise verf&uuml;gbar. Wir koennen ihnen denoch evtl helfen,
-								bitte kontaktieren sie unseren Support.
-							</div>
-						</div>
-					</div>
-					<div data-condition="bool(granted) == true">
-						<div class="row l1">
-							<div class="span l1" style="font-size: .8rem; color: #777">
-								Kein Visum erforderlich.
-							</div>
-						</div>
-					</div>
-				</div>
+				</template>
+
+				<div class="spacer" style="height: 20px"></div>
+
 			</div>
+		</template>
+
+		<div data-condition="count(passengers) == 0" class="desktop-only">
+			<!-- Display information that could be useful to the user -->
 		</div>
 
-		<div class="spacer" style="height: 20px"></div>
-		
+		<div style="display: none;">
+			<a style="text-align: center; background: rgb(1, 177, 215) none repeat scroll 0% 0%; color: rgb(255, 255, 255); border-top: 1px solid rgb(14, 173, 215); padding: 15px; display: block; cursor: pointer; font-weight: bolder; border-radius: 3px;">Jetzt auswahl bestellen.</a>
+		</div>
 	</div>
-	
-	<div data-condition="count(passengers) == 0" class="desktop-only">
-		<!-- Display information that could be useful to the user -->
-	</div>
-	
-	<div style="display: none;">
-		<a style="text-align: center; background: rgb(1, 177, 215) none repeat scroll 0% 0%; color: rgb(255, 255, 255); border-top: 1px solid rgb(14, 173, 215); padding: 15px; display: block; cursor: pointer; font-weight: bolder; border-radius: 3px;">Jetzt auswahl bestellen.</a>
-	</div>
-</div>
+</template>

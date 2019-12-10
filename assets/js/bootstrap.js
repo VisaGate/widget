@@ -134,7 +134,8 @@
 					.then(JSON.parse)
 					.then(function (payload) {
 						output(payload.payload);
-					});
+					})
+					.catch(console.error);
 				});
 
 				var regulations = pipe(function (input, output) {
