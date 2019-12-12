@@ -5,10 +5,41 @@
 
 <div class="spacer" style="height: 30px"></div>
 
+<div>
+	<div>
+		
+		<div class="row l1">
+			<div class="span l1">
+				<p class="secondary" style="margin: 0; padding: 0">
+					Sollen wir diese Informationen an ihre E-Mail Addresse senden? Ihre email 
+					wird nicht gespeichert.
+				</p>
+			</div>
+		</div>
+		
+		<div class="spacer" style="height: 10px"></div>
+		
+		<div class="row l5">
 
-<p style="text-align: right">
-	<a class="button grey" id="pdf-export">
-		<img src="assets/img/pdf.svg" style="height: 1.2em; vertical-align: middle;">
-		PDF Exportieren
-	</a>
-</p>
+			<div class="span l3">
+				<input id="email-address" class="frm-ctrl" type="text" placeholder="Email addresse">
+			</div>
+
+			<div class="span l1">
+				<a class="button fixed-height grey" id="pdf-email">
+					Senden
+				</a>
+			</div>
+
+			<div class="span l1">
+				<div style="height: 2.6rem; text-align: right">
+					<a id="pdf-export" class="idle" style="height: 2.6rem; display: inline-block; padding: .4rem 0; cursor: pointer; color: #333">
+						<img class="when-idle" src="assets/img/pdf.svg" style="height: 1.2em; vertical-align: middle;">
+						 <span class="when-busy spinner"></span>
+						<span style="vertical-align: middle; font-weight: bold;">PDF</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

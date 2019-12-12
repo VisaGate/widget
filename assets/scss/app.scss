@@ -468,3 +468,27 @@ input[type=text] {
 .clickable {
 	cursor: pointer;
 }
+
+.spinner {
+	display: inline-block;
+	height: 1.4rem;
+	width: 1.4rem;
+	border-radius: 50%;
+	border: solid 5px #AFCFE6;
+	border-top: solid 5px #3B89C1;
+	animation: linear 1s rotate360 infinite;
+	vertical-align: middle;
+}
+
+@keyframes rotate360 {
+	  0% { transform: rotate(000deg); }
+	100% { transform: rotate(360deg); }
+}
+
+.idle {
+	.when-busy { display: none; }
+}
+
+.busy {
+	.when-idle { display: none; }
+}

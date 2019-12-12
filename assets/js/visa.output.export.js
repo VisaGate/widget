@@ -20,11 +20,28 @@ depend(['m3/core/request', 'm3/core/collection', 'm3/promises/promise', 'pipe', 
 						
 						parent.querySelector("#pdf-export").addEventListener('click', function () {
 							console.log('PDF Exporter received CALL');
+							var button = this;
+							button.classList.add('busy');
+							button.classList.remove('idle');
 
 							request(api + '/generate/pdf', payload, true)
 							.then(function (response) {
 								var url = window.URL.createObjectURL(response);
 								window.open(url);
+								button.classList.add('idle');
+								button.classList.remove('busy');
+							})
+							.catch(console.error);
+						});
+						
+						parent.querySelector("#pdf-email").addEventListener('click', function () {
+							console.log('PDF Exporter received CALL');
+							
+							payload.email = document.getElementById('email-address').value;
+							
+							request(api + '/email/send', payload, true)
+							.then(function (response) {
+								alert('Email will be delivered in a few minutes')
 							})
 							.catch(console.error);
 						});
