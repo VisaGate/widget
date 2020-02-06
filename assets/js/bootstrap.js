@@ -1,12 +1,11 @@
 
 (function () {
 	
-	var baseURL = document.querySelector('meta[name="vg.assets"]').content;
+	var baseURL = document.querySelector('meta[name="vg.assets"]') ? document.querySelector('meta[name="vg.assets"]').content : 'https://widget.visa-gate.com/assets/';
 	var preload = [
 		baseURL + '/js/m3/depend.js',
 		baseURL + '/js/m3/depend/router.js'
 	];
-	
 	
 	var loadScript = function (location, then) {
 		var script = document.createElement('script');
@@ -52,7 +51,7 @@
 			['country.multiple', 'people.multiple', 'visa.output', 'visa.output.export', 'regulations.output', 'map', 'pipe', 'm3/promises/promise', 'm3/core/request', 'm3/core/collection'], 
 			function (target, people, visa, modExport, regout, map, pipe, Promise, request, collect) {
 
-			var api = document.querySelector('meta[name="vg.api"]').content;
+			var api = document.querySelector('meta[name="vg.api"]') ? document.querySelector('meta[name="vg.api"]').content : 'https://discovery.visa-gate.com/';
 			var targets = undefined;
 			var visaOut = undefined;
 			var peopleP = undefined;
@@ -176,7 +175,7 @@
 				.then(function (p) { targets = p; return visa.init(document.getElementById('output'), api); })
 				.then(function (p) { visaOut = p; return map.init(document.getElementById('map'), api); })
 				.then(function (p) { mapoutP = p; return regout.init(document.getElementById('regulations'), api); })
-				.then(function (p) { regoutP = p; return modExport.init(document.getElementById('export'), 'http://192.168.100.97/VG-PDF-Export/'); })
+				.then(function (p) { regoutP = p; return modExport.init(document.getElementById('export'), 'https://pdf.stage.visa-gate.com/'); })
 				.then(function (p) { exportP = p; main(); console.log('Success'); });
 	 
 			loadCSS(baseURL + '/css/app.css');
