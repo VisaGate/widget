@@ -103,12 +103,14 @@
 						document.getElementById('country-error').style.display = 'none';
 						document.getElementById('passenger-error').style.display = 'none';
 						document.getElementById('add-stop').style.display = 'block';
+						document.getElementById('step2').style.display = 'block';
 					}
 					else if (_ret.people.length > 0 && _ret.stops.length === 0) {
 						document.getElementById('add-stop').style.display = 'none';
 						document.getElementById('country-error').style.display = 'block';
 						document.getElementById('passenger-error').style.display = 'none';
 						document.getElementById('step2').style.display = 'block';
+						document.getElementById('target-country-form').style.display = 'block';
 					}
 					else {
 						document.getElementById('country-error').style.display = 'none';
