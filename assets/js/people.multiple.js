@@ -8,11 +8,12 @@
 depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'autocomplete'], function (request, Lysine, Promise, pipe, autocomplete) {
 	
 	var assetsURL = document.querySelector('meta[name="vg.assets"]').content;
+	var language  = document.querySelector('meta[name="vg.language"]').content;
 	
 	return {
 		init : function (parent, api) { 
 			return new Promise(function (success, failure) {
-				request(assetsURL + '/templates/people.multiple.html')
+				request(assetsURL + '/templates/' + language + '/people.multiple.html')
 					.then(function (response) {
 						parent.innerHTML = response;
 

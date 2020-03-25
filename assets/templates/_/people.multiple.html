@@ -37,13 +37,13 @@
 			</div>
 		</div>
 		<div class="span l3">
-			<input type="text" id="passenger-name" name="name" class="frm-ctrl" placeholder="Passagier Name" >
+			<input type="text" id="passenger-name" name="name" class="frm-ctrl" placeholder="<?= $translations['Passenger name'] ?>" >
 		</div>
 		<div class="span l3">
 			<input type="hidden" class="frm-ctrl autocomplete-passport" name="passport" data-placeholder="Staatsangeh&ouml;rigkeit">
 		</div>
 		<div class="span l1 s1" style="text-align: center">
-			<a class="button fixed-height disabled" id="add-person" style="width: 100%; text-align: center;">OK</a>
+			<button class="button fixed-height disabled" tabindex="0" id="add-person" style="width: 100%; text-align: center;">OK</button>
 		</div>
 	</div>
 	
@@ -55,7 +55,7 @@
 				<span style="text-align: center; background: #01b1d7; color: #FFFFFF; border-radius: 50%; display: inline-block; height: 1rem; width: 1rem; line-height: .9rem;">+</span>
 			</div>
 			<div class="span l7 s3">
-				Weiterer Passagier
+				<?= $translations['Add passenger'] ?>
 			</div>
 		</div>
 	</div>

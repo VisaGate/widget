@@ -8,11 +8,12 @@
 depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promises/promise'], function (request, Lysine, pipe, autocomplete, Promise) {
 	
 	var assetsURL = document.querySelector('meta[name="vg.assets"]').content;
+	var language  = document.querySelector('meta[name="vg.language"]').content;
 	
 	return {
 		init : function (parent, api) {
 			return new Promise(function (success, error) {
-				request(assetsURL + '/templates/country.multiple.html')
+				request(assetsURL + '/templates/' + language  + '/country.multiple.html')
 				.then(function (response) {
 					parent.innerHTML = response;
 
@@ -42,6 +43,20 @@ depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promise
 
 					var p = pipe(function (input, output) {
 						console.log('Woke up input pipe');
+						
+						/*
+						 * This pipe is generally not designed to receive any input from
+						 * a preceding pipe (this is because it generally prepares the
+						 * UI with the express intent of being a source), but if an 
+						 * application expressly includes code to initalize the UI or
+						 * whishes to modify it programatically, they can do that.
+						 */
+						if (input) {
+							view.setData({stops: input[0]});
+							output(view.get('stops').slice(0));
+							return;
+						}
+						
 						view.on('#commit-stop', 'click', function (el, e) {
 							var input = view.find('.autocomplete-target');
 							var data = view.get('stops');

@@ -2,11 +2,12 @@
 depend(['m3/promises/promise', 'm3/core/request', 'm3/core/lysine', 'pipe'], function (Promise, request, Lysine, pipe) {
 	
 	var assetsURL = document.querySelector('meta[name="vg.assets"]').content;
+	var language  = document.querySelector('meta[name="vg.language"]').content;
 	
 	return {
 		init : function (parent, api) {
 			return new Promise(function (success, failure) {
-				request(assetsURL + '/templates/map.html').then(function (response) {
+				request(assetsURL + '/templates/' + language + '/map.html').then(function (response) {
 					parent.innerHTML = response;
 					
 					var view = new Lysine.view('map');

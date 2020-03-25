@@ -11,6 +11,10 @@ and open the template in the editor.
 @import "_/_.scss";
 @import "_autocomplete.scss";
 
+template {
+	display: none;
+}
+
 .frm-ctrl {
 	border: none;
 }
@@ -28,6 +32,32 @@ input[type="text"], select {
 	background: #F7F7F7;
 	height: 2.6rem;
 	font-family: inherit;
+}
+
+
+.shadow-input.outer {
+	@extend .frm-ctrl;
+	font-size: .8rem !important;
+	line-height: 1.2rem;
+	background: #F7F7F7;
+	height: 2.6rem;
+	font-family: inherit;
+}
+
+.shadow-input.inner,
+.shadow-input.shadow {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: .8rem !important;
+	line-height: 1.2rem;
+	height: 2.6rem;
+	font-family: inherit;
+	padding: .75rem 0rem .75rem .5rem;
+}
+
+.shadow-input.shadow {
+	color: #AAA;
+	padding: .75rem .5rem .75rem 0rem;
 }
 
 .faux-field {

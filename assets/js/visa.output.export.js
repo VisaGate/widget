@@ -9,11 +9,12 @@
 depend(['m3/core/request', 'm3/core/collection', 'm3/promises/promise', 'pipe', 'autocomplete'], function (request, collect, Promise, pipe, autocomplete) {
 	
 	var assetsURL = document.querySelector('meta[name="vg.assets"]').content;
+	var language  = document.querySelector('meta[name="vg.language"]').content;
 	
 	return {
 		init : function (parent, api) { 
 			return new Promise(function (success, failure) {
-				request(assetsURL + '/templates/visa.output.export.html')
+				request(assetsURL + '/templates/' + language + '/visa.output.export.html')
 					.then(function (response) {
 						parent.innerHTML = response;
 						var payload = undefined;
@@ -26,8 +27,18 @@ depend(['m3/core/request', 'm3/core/collection', 'm3/promises/promise', 'pipe', 
 
 							request(api + '/generate/pdf', payload, true)
 							.then(function (response) {
-								var url = window.URL.createObjectURL(response);
-								window.open(url);
+								
+								try {
+									var url = window.URL.createObjectURL(response);
+									window.open(url);
+								} 
+								catch (e) {
+									if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+										window.navigator.msSaveOrOpenBlob(response, 'erstinformation.pdf');
+									}
+									else { throw e; }
+								}
+								
 								button.classList.add('idle');
 								button.classList.remove('busy');
 							})

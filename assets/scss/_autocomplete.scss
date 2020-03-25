@@ -10,19 +10,15 @@ and open the template in the editor.
 
 
 
-.autocomplete-input {
-	font-weight: bolder;
-	width: 100%;
-}
 
 .autocomplete-results.autocomplete-hidden {
 	display: none;
 }
 
-.autocomplete-results .autocomplete-result {
+.dropdownlist-list .dropdownlist-entry {
 	white-space: nowrap;
 	color: #555;
-	padding: .5rem .9rem;
+	padding: .5rem .5rem;
 	font-size: .8rem;
 	cursor: pointer;
 	border-radius: 5px;
@@ -37,16 +33,16 @@ and open the template in the editor.
 @media all and (max-width: 600px) {
 	
 
-	.autocomplete-results {
+	.dropdownlist-list {
 		position: absolute;
 		width: 95%;
 		box-shadow: 0 0 3px rgba(0, 0, 0, .3);
 		border-radius: 5px;
-		padding: 0;
+		padding: .5rem 0;
 		left: 2.5%;
 		z-index: 5;
 		background: #FFF;
-		margin-top: 10px;
+		margin-top: 5px;
 	}
 
 	.autocomplete-results-anchor {
@@ -56,14 +52,14 @@ and open the template in the editor.
 
 @media all and (min-width: 601px) {
 	
-	.autocomplete-results {
+	.dropdownlist-list {
 		position: absolute;
 		width: 100%;
-		min-width: 350px;
+		min-width: 300px;
 		box-shadow: 0 0 3px rgba(0, 0, 0, .3);
 		border-radius: 5px;
 		padding: 0;
-		top: 10px;
+		top: 5px;
 		left: 0;
 		z-index: 5;
 		background: #FFF;

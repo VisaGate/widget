@@ -48,9 +48,22 @@ depend([], function () {
 		},
 		
 		wake: function () {
-			
 			var self = this;
 			this.body(undefined, function (e) { self.broadcast(e); });
+		},
+		
+		/*
+		 * Push data into the pipe.
+		 * 
+		 * This was included to ensure that pipes that are generally sources (like
+		 * an input field) can be sent information to change their content on the 
+		 * fly. This function should not be called regularly, if your application
+		 * intends to regularly send updates to a pipe, it should be creating a pipe
+		 * of it's own and feed data that way.
+		 */
+		feed: function (data) {
+			var self = this;
+			this.body(data, function (e) { self.broadcast(e); });
 		},
 		
 		broadcast: function (value) {
