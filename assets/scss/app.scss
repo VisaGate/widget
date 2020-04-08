@@ -321,13 +321,20 @@ input[type="submit"] {
 }
 
 .visa-result .description {
-	white-space: nowrap;
-	text-overflow: ellipsis;
 	overflow: hidden;
 	display: block;
 	color: #555;
 	font-size: .8rem;
 	padding: .3rem 0;
+	
+	.frm-ctrl-rad {
+		float: left;
+	}
+	
+	span[data-for="name"] {
+		display: block;
+		margin-left: 35px;
+	}
 }
 
 .separator {
