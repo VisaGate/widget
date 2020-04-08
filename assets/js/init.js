@@ -168,6 +168,20 @@
 				.then(function () { main(); console.log('Success'); });
 	 
 			loadCSS(baseURL + '/css/app.css');
+			
+			/*
+			 * Update the copyright year. I personally do HATE noticing that I forgot 
+			 * updating the copyright year and feel quite ashamed when I do so.
+			 * 
+			 * Because of this, I'll automate it here.
+			 */
+			try {
+				var year = document.querySelectorAll('.current-year');
+				collect(year).each(function (e) { e.textContent = (new Date()).getFullYear(); })
+			}
+			catch (e) {
+				console.error('Failed to update the copyright year, got error' + e);
+			}
 		});
 		
 	};
