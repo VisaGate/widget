@@ -5,7 +5,7 @@
  */
 
 
-depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promises/promise'], function (request, Lysine, pipe, autocomplete, Promise) {
+depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promises/promise', 'ui/dropdownlist'], function (request, Lysine, pipe, autocomplete, Promise, dropdown) {
 	
 	var assetsURL = document.querySelector('meta[name="vg.assets"]').content;
 	var language  = document.querySelector('meta[name="vg.language"]').content;
@@ -101,6 +101,36 @@ depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promise
 
 							var s = view.get('stops').slice(0);
 							output(s);
+						});
+						
+						
+						var dd = undefined;
+						view.sub('stops').on('span.reason', 'click', function (e, v) {
+							
+							if (dd) {
+								dd.remove();
+								dd = undefined;
+							}
+							
+							console.log(e);
+							dd = dropdown.list(e.target.parentNode.parentNode, function (val) {
+								v.set('reason', val.key);
+								output(view.get('stops').slice(0));
+								dd.remove();
+								dd = undefined;
+							});
+							
+							dd.put(dropdown.entry('tourist', 'Tourist', {}));
+							dd.put(dropdown.entry('business', 'Business', {}));
+							dd.put(dropdown.entry('student', 'Student', {}));
+							dd.show()
+						});
+						
+						view.sub('stops').tearDown(function () {
+							if (dd) {
+								dd.remove();
+								dd = undefined;
+							}
 						});
 					});
 

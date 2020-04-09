@@ -200,6 +200,10 @@ depend(function () {
 			var idx = this.options.indexOf(this.highlighted) + 1;
 			this.highlighted = idx < this.options.length? this.options[idx] : undefined;
 			this.highlighted.focus();
+		},
+		
+		remove : function () {
+			this.container.parentNode.removeChild(this.container);
 		}
 	};
 	
