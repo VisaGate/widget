@@ -57,8 +57,24 @@ depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'aut
 								var data = view.get('passengers');
 
 								if (input.value === '') { return; }
-
-								data.push({name: view.find('#passenger-name').value || 'Passagier', document: input.value, flag: api + '/image/flag/' + input.value.substr(1), country: input.dataset.name })
+								
+								/*
+								 * The _PID argument is added as a random id, it just
+								 * helps applications keeping track of multiple passengers
+								 * in a single request. The string can be ommitted, it just
+								 * sometimes helps having it to refer to a passenger.
+								 * 
+								 * It is entirely optional, and just intended to make
+								 * life easier for application developers.
+								 */
+								data.push({
+									name: view.find('#passenger-name').value || 'Passagier', 
+									_pid : Math.random().toString(36).substring(7),
+									document: input.value, 
+									flag: api + '/image/flag/' + input.value.substr(1), 
+									country: input.dataset.name
+								});
+								
 								view.set('passengers', data);
 
 								var s = view.get('passengers').slice(0);

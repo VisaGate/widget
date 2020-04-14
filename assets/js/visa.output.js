@@ -5,10 +5,22 @@
  */
 
 
-depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'autocomplete'], function (request, Lysine, Promise, pipe, autocomplete) {
+depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'm3/core/parent', 'm3/core/collection'], function (request, Lysine, Promise, pipe, ancestor, collect) {
 	
 	var assetsURL = document.querySelector('meta[name="vg.assets"]').content;
 	var language  = document.querySelector('meta[name="vg.language"]').content;
+	
+	/*
+	 * The selection cache allows the system to persist the user's selection when
+	 * the UI is refreshed. Lysine will reset the selection, since the data it receives
+	 * does not indicate whether the selection was made.
+	 * 
+	 * Once the data has been redrawn, we will explicitly set the selection back 
+	 * in place.
+	 * 
+	 * @type Array
+	 */
+	var selectionCache = [];
 	
 	return {
 		init : function (parent, api) { 
@@ -27,24 +39,46 @@ depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'aut
 						 */
 
 						var p = pipe(function (input, output) {
-							console.log('Renderer activated');
-							console.log({passengers: input[0]});
+							
+							var selected  = document.querySelectorAll('input.visa-result-radio:checked');
+							selectionCache = [];
+							
+							for (var i = 0; i < selected.length; i++) {
+								selectionCache.push([
+									ancestor(selected[i], function (e) { return e.hasAttribute('data-pid'); }).getAttribute('data-pid'),
+									ancestor(selected[i], function (e) { return e.hasAttribute('data-sid'); }).getAttribute('data-sid'),
+									selected[i].getAttribute('data-product')
+								]);
+							}
 							
 							var passengers = input[0];
 							
 							try {
+								
+								/*
+								 * This extracts the data from the selection cache and
+								 * matches it against the data returned from the server.
+								 * 
+								 * Needs a proper refactoring, I think this was the first
+								 * time I needed the letter L for an iterator.
+								 */
+								collect(selectionCache).each(function (selection) {
+									collect(passengers).each(function (passenger) {
+										if (passenger._pid !== selection[0]) { return; } 
+										
+										collect(passenger.stops).each(function (stop) {
+											if (stop._sid !== selection[1]) { return } 
+											
+											collect(stop.candidates).each(function (candidate) {
+												if (!candidate.documents[0].product) { return; } 
+												candidate.documents[0].product.selected = candidate.documents[0].product.id === parseInt(selection[2]);
+											});
+										});
+									});
+								});
+								
 								view.setData({passengers: passengers});
 								
-								/**
-								 * This is necessary to default the inputs to selecting 
-								 * the default element.
-								 * 
-								 * @type type
-								 */
-								var inputs = view.findAll('div[data-for="candidates"]:not([data-lysine-view]):first-child .product:not([data-lysine-view]) input[type="radio"]');
-								for (var i = 0; i < inputs.length; i++) {
-									inputs[i].checked = true;
-								}
 							}catch (e) {console.log(e);}
 						});
 						

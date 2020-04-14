@@ -6,10 +6,26 @@
 
 
 
-depend(['m3/core/request', 'm3/core/collection', 'm3/promises/promise', 'pipe', 'autocomplete'], function (request, collect, Promise, pipe, autocomplete) {
+depend(['m3/core/request', 'm3/core/collection', 'm3/promises/promise', 'pipe', 'm3/core/parent'], function (request, collect, Promise, pipe, ancestor) {
 	
 	var assetsURL = document.querySelector('meta[name="vg.assets"]').content;
 	var language  = document.querySelector('meta[name="vg.language"]').content;
+	
+	var makeSelection = function () {
+		
+		var selected  = document.querySelectorAll('input.visa-result-radio:checked');
+		var selection = [];
+
+		for (var i = 0; i < selected.length; i++) {
+			selection.push(
+				ancestor(selected[i], function (e) { return e.hasAttribute('data-pid'); }).getAttribute('data-pid') + '-' +
+				ancestor(selected[i], function (e) { return e.hasAttribute('data-sid'); }).getAttribute('data-sid') + '-' + 
+				selected[i].getAttribute('data-product')
+			);
+		}
+		
+		return selection;
+	};
 	
 	return {
 		init : function (parent, api) { 
@@ -24,6 +40,11 @@ depend(['m3/core/request', 'm3/core/collection', 'm3/promises/promise', 'pipe', 
 							var button = this;
 							button.classList.add('busy');
 							button.classList.remove('idle');
+							
+							/*
+							 * Add the selection to the request.
+							 */
+							payload.selection = makeSelection();
 
 							request(api + '/generate/pdf', payload, true)
 							.then(function (response) {
@@ -63,8 +84,8 @@ depend(['m3/core/request', 'm3/core/collection', 'm3/promises/promise', 'pipe', 
 							var stops = input[0].stops;
 							
 							payload = {
-								people: collect(people).each(function (e) { return {name: e.name, documents: [e.document]}; }).raw(),
-								stops: collect(stops).each(function (e) { return { country: e.ISO, reason: e.reason }; }).raw()
+								people: collect(people).each(function (e) { return {name: e.name, documents: [e.document], _pid : e._pid}; }).raw(),
+								stops: collect(stops).each(function (e) { return { country: e.ISO, reason: e.reason, _sid : e._sid }; }).raw()
 							};
 						});
 						

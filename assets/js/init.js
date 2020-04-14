@@ -112,6 +112,13 @@
 					})
 					.then(JSON.parse)
 					.then(function (payload) {
+						console.log(payload);
+						for (var i = 0; i < payload.payload.length; i++) {
+							payload.payload[i]._pid = people[i]._pid;
+							for (var j = 0; j < payload.payload[i].stops.length; j++) {
+								payload.payload[i].stops[j]._sid = stops[j]._sid;
+							}
+						}
 						output(payload.payload);
 					})
 					.catch(console.error);
@@ -157,7 +164,7 @@
 				.then(function () { return visa.init(document.getElementById('output'), api); }).then(function (p) { visaOut = p; })
 				.then(function () { return map.init(document.getElementById('map'), api); }).then(function (p) { mapoutP = p; })
 				.then(function () { return regout.init(document.getElementById('regulations'), api); }).then(function (p) { regoutP = p; })
-				.then(function () { return modExport.init(document.getElementById('export'), 'https://pdf.stage.visa-gate.com/'); }).then(function (p) { exportP = p; })
+				.then(function () { return modExport.init(document.getElementById('export'), 'http://192.168.10.137/VG-PDF-Export/'); }).then(function (p) { exportP = p; })
 				.then(function () { main(); console.log('Success'); });
 	 
 			loadCSS(baseURL + '/css/app.css');

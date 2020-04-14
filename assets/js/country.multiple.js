@@ -62,8 +62,19 @@ depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promise
 							var data = view.get('stops');
 							
 							if (input.value === '') { return; }
-
-							data.push({name: input.dataset.name, ISO: input.value, lat: input.dataset.lat, lon: input.dataset.lon, reason: view.find('#reason').value })
+							
+							/*
+							 * The _SID is used to map regulations to the unique
+							 */
+							data.push({
+								name: input.dataset.name, 
+								_sid : Math.random().toString(36).substring(7),
+								ISO: input.value, 
+								lat: input.dataset.lat, 
+								lon: input.dataset.lon, 
+								reason: view.find('#reason').value
+							});
+							
 							view.set('stops', data);
 
 							var s = view.get('stops').slice(0);

@@ -2,75 +2,77 @@
 <template data-lysine-view="visa-output">
 	<div class="visa wrapper transparent">
 		<template data-lysine-view data-for="passengers">
-			<div >
+			<div>
 				<div style="background: linear-gradient(0deg, transparent 14px, #0eadd7 14px, #0eadd7 15px, transparent 15px); text-align: center;">
 					<h2 data-for="name" style="display: inline-block; background: #FFF; line-height: 1.2rem">User A</h2>
 				</div>
-				<template data-lysine-view data-for="stops">
-					<div>
-						<div class="spacer" style="height: 10px"></div>
-						<div class="visa-result">
-							<div class="row l1">
-								<div class="span l1">
-									<span class="title" data-for="country.name"></span>
+				<div class="stops" data-lysine-data-pid="{{_pid}}">
+					<template data-lysine-view data-for="stops">
+						<div>
+							<div class="spacer" style="height: 10px"></div>
+							<div class="visa-result">
+								<div class="row l1">
+									<div class="span l1">
+										<span class="title" data-for="country.name"></span>
+									</div>
 								</div>
-							</div>
-							<div data-condition="count(candidates) != 0">
-								<div data-condition="count(candidates) != 1">
+								<div data-condition="count(candidates) != 0">
+									<div data-condition="count(candidates) != 1">
+										<div data-condition="bool(granted) == false">
+											<div class="row l1">
+												<div class="span l1" style="font-size: .6rem; color: #777">
+													Bitte wählen Sie das passende Visum aus.
+
+													<div class="spacer" style="height: 20px"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<form data-lysine-data-sid="{{_sid}}">
+									<template data-lysine-view data-for="candidates">
+										<div class="visa-result-candidates">
+											<template data-lysine-view data-for="documents">
+												<div class="row s5 l4 product">
+													<div class="span s3 l3" data-condition="null(product) == false">
+														<label  class="description">
+															<input type="radio" name="document" class="frm-ctrl visa-result-radio" data-lysine-data-product="{{product.id}}" data-for="product.selected" >
+															<span class="frm-ctrl-rad"></span>
+
+															<span data-for="name" data-lysine-class="{{recommended?highlight:secondary}}"></span>
+														</label>
+													</div>
+													<div class="span s2 l1" data-condition="null(product) == false" style="text-align: right;">
+														<a class="buy-now" target="_blank" data-lysine-href="{{product.url}}"><span data-for="product.price.natural"></span> €</a>
+													</div>
+												</div>
+											</template>
+										</div>
+									</template>
+									<input type="hidden" name="selected" value="0">
+								</form>
+
+								<div data-condition="count(candidates) == 0">
 									<div data-condition="bool(granted) == false">
 										<div class="row l1">
-											<div class="span l1" style="font-size: .6rem; color: #777">
-												Bitte wählen Sie das passende Visum aus.
-
-												<div class="spacer" style="height: 20px"></div>
+											<div class="span l1" style="font-size: .8rem; color: #777">
+												Kein Visum fuer die Einreise verf&uuml;gbar. Wir koennen ihnen denoch evtl helfen,
+												bitte kontaktieren sie unseren Support.
 											</div>
 										</div>
 									</div>
-								</div>
-							</div>
-							<form>
-								<template data-lysine-view data-for="candidates">
-									<div>
-										<template data-lysine-view data-for="documents">
-											<div class="row s5 l4 product">
-												<div class="span s3 l3" data-condition="null(product) == false">
-													<label  class="description">
-														<input type="radio" name="document" class="frm-ctrl" data-lysine-data-product="{{product.id}}" >
-														<span class="frm-ctrl-rad"></span>
-
-														<span data-for="name" data-lysine-class="{{recommended?highlight:secondary}}"></span>
-													</label>
-												</div>
-												<div class="span s2 l1" data-condition="null(product) == false" style="text-align: right;">
-													<a class="buy-now" target="_blank" data-lysine-href="{{product.url}}"><span data-for="product.price.natural"></span> €</a>
-												</div>
+									<div data-condition="bool(granted) == true">
+										<div class="row l1">
+											<div class="span l1" style="font-size: .8rem; color: #777">
+												Kein Visum erforderlich.
 											</div>
-										</template>
-									</div>
-								</template>
-								<input type="hidden" name="selected" value="0">
-							</form>
-
-							<div data-condition="count(candidates) == 0">
-								<div data-condition="bool(granted) == false">
-									<div class="row l1">
-										<div class="span l1" style="font-size: .8rem; color: #777">
-											Kein Visum fuer die Einreise verf&uuml;gbar. Wir koennen ihnen denoch evtl helfen,
-											bitte kontaktieren sie unseren Support.
-										</div>
-									</div>
-								</div>
-								<div data-condition="bool(granted) == true">
-									<div class="row l1">
-										<div class="span l1" style="font-size: .8rem; color: #777">
-											Kein Visum erforderlich.
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</template>
+					</template>
+				</div>
 
 				<div class="spacer" style="height: 20px"></div>
 
