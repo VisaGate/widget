@@ -93,8 +93,6 @@ depend(function () {
 			 * in the autocomplete itself to register the user's option.
 			 */
 			opt.addEventListener('click', function (e) {
-				console.log('click');
-				console.log(ctx);
 				ctx.onchange(entry);
 				e.stopPropagation();
 				return;
@@ -133,7 +131,7 @@ depend(function () {
 	
 	var List = function (parent, onchange) {
 		this.container  = document.createElement('div');
-		this.container.className = cssPrefix + 'list ' + cssPrefix + ' hidden'; // ${cssPrefix}list ${cssPrefix}hidden`;
+		this.container.className = cssPrefix + 'list ' + cssPrefix + 'hidden'; // ${cssPrefix}list ${cssPrefix}hidden`;
 		
 		this.options = [];
 		
@@ -202,6 +200,12 @@ depend(function () {
 			this.highlighted.focus();
 		},
 		
+		/**
+		 * Removes the dropdown from the DOM Tree. This can be used to tear the 
+		 * dropdown list down and removing it completely.
+		 * 
+		 * @returns {undefined}
+		 */
 		remove : function () {
 			this.container.parentNode.removeChild(this.container);
 		}

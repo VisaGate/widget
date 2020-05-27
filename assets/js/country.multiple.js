@@ -5,10 +5,15 @@
  */
 
 
-depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promises/promise', 'ui/dropdownlist'], function (request, Lysine, pipe, autocomplete, Promise, dropdown) {
+depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promises/promise', 'ui/dropdownlist', 'levenshtein'], function (request, Lysine, pipe, autocomplete, Promise, dropdown, levenshtein) {
 	
-	var assetsURL = document.querySelector('meta[name="vg.assets"]').content;
-	var language  = document.querySelector('meta[name="vg.language"]').content;
+	var meta = function (name, def) {
+		return document.querySelector('meta[name="' + name + '"]')? document.querySelector('meta[name="' + name + '"]').content : def;
+	};
+	
+	var assetsURL     = document.querySelector('meta[name="vg.assets"]').content;
+	var language      = document.querySelector('meta[name="vg.language"]').content;
+	var defaultReason = meta('vg.stops.reason.default', 'tourist');
 	
 	return {
 		init : function (parent, api) {
@@ -33,7 +38,28 @@ depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promise
 							for (var i in r) {
 								if (!r.hasOwnProperty(i)) { continue; }
 								if (c > 5) { continue; }
-								ret.push(entry(r[i].name, r[i].resource, {lon: r[i].coordinates[0], lat: r[i].coordinates[1], name: r[i].name }));
+								
+								/*
+								 * This section of the code attempts to extract the closest
+								 * Levenshtein distance between the input data and the keywords
+								 * that the system associates with a certain country.
+								 * 
+								 * This allows the system to suggest a keyword that is as similar
+								 * as possible to the input. And therefore, when a user inputs
+								 * beijing as a query, the system will suggest "beijing, china"
+								 * as the country.
+								 */
+								var distance = levenshtein(input, r[i].name);
+								var closest  = r[i].name;
+								
+								for (var j in r[i].keywords) {
+									if (levenshtein(input, r[i].keywords[j]) > distance) {
+										distance = levenshtein(input, r[i].keywords[j]);
+										closest = r[i].keywords[j] + ', ' + r[i].name;
+									}
+								}
+								
+								ret.push(entry(closest, r[i].resource, {lon: r[i].coordinates[0], lat: r[i].coordinates[1], name: r[i].name }));
 								c++;
 							}
 							output(ret);
@@ -90,7 +116,10 @@ depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promise
 						view.find('#add-stop').addEventListener('click', function () {
 							view.find('#target-country-form').style.display = 'block';
 							view.find('#add-stop').style.display = 'none';
+							view.find('#reason').value = defaultReason;
 						});
+						
+						view.find('#reason').value = defaultReason;
 						
 						view.find('.autocomplete-target').addEventListener('change', function () {
 							view.find('#commit-stop').classList[view.find('.autocomplete-target').value? 'remove' : 'add']('disabled');

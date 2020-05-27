@@ -21,7 +21,7 @@
 										<div data-condition="bool(granted) == false">
 											<div class="row l1">
 												<div class="span l1" style="font-size: .6rem; color: #777">
-													Bitte wählen Sie das passende Visum aus.
+													<?= $translations['Please select the appropriate visa'] ?>.
 
 													<div class="spacer" style="height: 20px"></div>
 												</div>
@@ -56,16 +56,16 @@
 									<div data-condition="bool(granted) == false">
 										<div class="row l1">
 											<div class="span l1" style="font-size: .8rem; color: #777">
-												Kein Visum für die Einreise verfügbar. Wir können Ihnen dennoch helfen,
-												kontaktieren Sie gerne unseren Support unter der kostenlosen Hotline: <strong>0800 84724283</strong>
+												<?= $translations['No visa available'] ?>. 
+												<?= $translations['We can still help. Reach out to us on the free service hotline'] ?>: <strong>0800 84724283</strong>
 											</div>
 										</div>
 									</div>
 									<div data-condition="bool(granted) == true">
 										<div class="row l1">
 											<div class="span l1" style="font-size: .8rem; color: #777">
-												Kein Visum erforderlich. Bei Rückfragen können wir Ihnen dennoch helfen,
-												kontaktieren Sie gerne unseren Support unter der kostenlosen Hotline: <strong>0800 84724283</strong>
+												<?= $translations['No visa required'] ?>. 
+												<?= $translations['We can still help. Reach out to us on the free service hotline'] ?>: <strong>0800 84724283</strong>
 											</div>
 										</div>
 									</div>

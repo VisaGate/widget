@@ -6,7 +6,7 @@
 		<div id="step1">
 			<div class="spacer" style="height: 20px"></div>
 
-			<h2 style="padding-left: .3rem;">Personen</h2>
+			<h2 style="padding-left: .3rem;"><?= $translations['Passengers'] ?></h2>
 			<div class="wrapper">
 				<div class="spacer" style="height: 4px"></div>
 				<div id="passports"></div>
@@ -15,9 +15,9 @@
 			<div class="wrapper transparent" id="passenger-error">
 				<div class="spacer" style="height: 10px"></div>
 				<div class="info-message">
-					<strong>Wer soll mitfliegen?</strong> Gib einen Namen (dieser kann auch
-					ein Nickname sein) und wähle deine Staatsangehörigkeit. Bestätige 
-					deine Eingabe dann mit OK.
+					<strong><?= $translations['Who is flying?'] ?></strong> 
+					<?= $translations['Enter your name (this may also be a nickname) and select your nationality'] ?>. 
+					<?= $translations['Confirm by pressing OK']?>
 				</div>
 			</div>
 		</div>
@@ -34,8 +34,8 @@
 			<div class="wrapper transparent" id="country-error" style="display: none">
 				<div class="spacer" style="height: 10px"></div>
 				<div class="info-message">
-					<strong>Wohin soll die Reise gehen?</strong> Suche das Zielland aus, 
-					unser Visaexperte hilft dir das richtige Visum zu finden.
+					<strong><?= $translations['Where are you travelling to?'] ?></strong> 
+					<?= $translations['Select a destination. Our visa finder will help you find the right visa for you'] ?>.
 				</div>
 			</div>
 			<div class="spacer" style="height: 50px"></div>

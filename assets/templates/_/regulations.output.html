@@ -5,13 +5,13 @@
 	<div data-condition="count(regulations)!= 0"  style="background: #FAFAFA; border-bottom: solid 1px #CCC;">
 		
 		<div class="spacer" style="height: 10px"></div>
-		<h2 style="text-align: center;">✔️ Deine Checkliste</h2>
+		<h2 style="text-align: center;">✔️ <?= $translations['Your checklist'] ?></h2>
 		<template data-lysine-view data-for="regulations">
 			<div>
 				<div class="spacer" style="height: 10px"></div>
 				<div class="wrapper transparent">
 					<div class="visa-result">
-						<span class="title" data-for="country.name">Land</span>
+						<span class="title" data-for="country.name"><?= $translations['Country'] ?></span>
 					</div>
 
 					<div class="considerations">
@@ -38,15 +38,14 @@
 	</div>
 	
 	<div data-condition="count(regulations) == 0" style="padding: 10px">
-		<h2>Benötigen Sie Hilfe bei der Beantragung eines Visums?</h2>
+		<h2><?= $translations['Need help requesting your visa?'] ?></h2>
 		<p class="secondary">
-			Willkommen bei unseren Visaexperten! Einfach Ihr Reiseziel im Ziel-Konfigurator 
-			auswählen und im Handumdrehen das passende Visum finden.
+			<?= $translations['Welcome to our visa locator tool'] ?>! 
+			<?= $translations['Simply enter the destination and findout whether you need a visa in seconds']?>.
 		</p>
 		
 		<p class="secondary">
-			Falls Sie weitere Hilfe brauchen, kontaktieren Sie gerne unseren Support 
-			unter der kostenlosen Hotline: <strong>0800 84724283</strong>
+			<?= $translations['If you need further assistance, please contact our support using our toll-free number']?>: <strong>0800 84724283</strong>
 		</p>
 	</div>
 </div>

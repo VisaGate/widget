@@ -25,7 +25,7 @@ depend('ui/shadowinput', function () {
 		
 		this.outer  = document.createElement('div');
 		this.value  = document.createElement('input');
-		this.inner  = document.createElement('span');
+		this.inner  = document.createElement('div');
 		this.shadow = document.createElement('span');
 		this.placeholder = placeholder;
 		
@@ -56,17 +56,12 @@ depend('ui/shadowinput', function () {
 		this.inner.contentEditable = true;
 		
 		this.outer.addEventListener('click', function () {
-			if (ctx.inner.childNodes.length == 0) {
-				ctx.inner.focus();
-				return;
-			}
 			
 			var range = document.createRange();
 			var sel = document.getSelection();
 			
-			console.log(ctx.inner.firstChild);
-			range.setStart(ctx.inner.firstChild, ctx.inner.firstChild.length);
-			range.setEnd(ctx.inner.firstChild, ctx.inner.firstChild.length);
+			range.setStart(ctx.inner.firstChild || ctx.inner, (ctx.inner.firstChild || ctx.inner).textContent.length);
+			range.setEnd(ctx.inner.firstChild || ctx.inner, (ctx.inner.firstChild || ctx.inner).textContent.length);
 			sel.removeAllRanges();
 			sel.addRange(range);
 		});
@@ -78,6 +73,12 @@ depend('ui/shadowinput', function () {
 			
 			callback(this.textContent, function (txt) { ctx.shadow.innerHTML = txt; });
 		});
+		
+		document.addEventListener('selectionchange', function () {
+			var selection = window.getSelection();
+			var range = selection.getRangeAt(0);
+			console.log(range);
+		})
 		
 		this.inner.addEventListener('blur', function () {
 			if (this.textContent === '') { ctx.shadow.innerHTML = placeholder; }
@@ -91,9 +92,12 @@ depend('ui/shadowinput', function () {
 		},
 		
 		set : function (to) {
+			var div = document.createElement('div');
+			div.innerHTML = to;
+			
 			var range = document.createRange();
 			var sel = document.getSelection();
-			this.inner.innerHTML = to;
+			this.inner.innerHTML = div.textContent;
 			
 			if (this.inner.firstChild) {
 				range.setStart(this.inner.firstChild, this.inner.firstChild.length);

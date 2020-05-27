@@ -51,7 +51,13 @@ depend(['m3/core/request', 'm3/core/collection', 'm3/promises/promise', 'pipe', 
 								
 								try {
 									var url = window.URL.createObjectURL(response);
-									window.open(url);
+									var a   = document.createElement('a');
+									a.download = 'erstinformation.pdf';
+									a.href = url;
+									document.body.appendChild(a);
+									a.click();
+									setTimeout(function () { a.parentNode.removeChild(a); }, 200);
+									//window.open(url);
 								} 
 								catch (e) {
 									if (window.navigator && window.navigator.msSaveOrOpenBlob) {

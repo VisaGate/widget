@@ -75,7 +75,6 @@ depend(['m3/core/collection', 'ui/dropdownlist', 'ui/shadowinput', 'ui/keyboard'
 			callable(input, function (result) {
 				//Result is expected to be an object of keys and strings
 				//Or an array
-				self.draw(result);
 				console.log(result[0]);
 				var shadow;
 				
@@ -83,6 +82,7 @@ depend(['m3/core/collection', 'ui/dropdownlist', 'ui/shadowinput', 'ui/keyboard'
 				else { shadow = '(' + result[0].value + ')'; }
 				
 				output(shadow);
+				self.draw(result);
 			}, function (v, k, m) { return dropdown.entry(k, v, m); });
 			
 			if (self.element.value !== '') {
@@ -163,6 +163,22 @@ depend(['m3/core/collection', 'ui/dropdownlist', 'ui/shadowinput', 'ui/keyboard'
 			self.dummy.set(entry.value);
 		});
 		
+		/*
+		 * If the user presses escape on the keyboard without making a selection, the
+		 * user is asking the system to leave the value empty.
+		 */
+		this.keyboard.down(Keyboard.keys.escape, function () {
+			
+			if (self.element.value) {
+				return;
+			}
+			
+			self.element.dispatchEvent(new Event('change', {'bubbles': false, 'cancelable': true}));
+			self.drop.clear();
+			self.dummy.suggest('');
+			self.dummy.set('');
+		});
+		
 		this.anchor.className = 'autocomplete-results-anchor';
 
 		element.parentNode.insertBefore(this.dummy.outer,element);
@@ -222,7 +238,10 @@ depend(['m3/core/collection', 'ui/dropdownlist', 'ui/shadowinput', 'ui/keyboard'
 			this.drop.show();
 			
 			collect(result).each(function (e) {
-				self.drop.put(typeof(e) === 'object'? e : dropdown.entry(e, e, {}));
+				var entry = typeof(e) === 'object'? e : dropdown.entry(e, e, {});
+				entry.value = entry.value.replace(new RegExp(self.dummy.inner.textContent, "gi"), function (e) { return '<strong>' + e + '</strong>'});
+				console.log(self.dummy);
+				self.drop.put(entry);
 			});
 			
 		}
