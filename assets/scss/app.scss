@@ -528,3 +528,13 @@ input[type=text] {
 .busy {
 	.when-idle { display: none; }
 }
+
+.cart-icon {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background-image: url('../img/cart.png');
+	background-size: 16px 16px;
+	background-repeat: no-repeat;
+	vertical-align: -2px;
+}

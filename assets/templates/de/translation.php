@@ -46,6 +46,7 @@ $translations = [
 	'Please select the appropriate visa' => 'Bitte wählen Sie das passende Visum aus',
 	'No visa available' => 'Kein Visum für die Einreise verfügbar',
 	'No visa required' => 'Kein Visum erforderlich',
+	'Order now' => 'Order now',
 	'We can still help. Reach out to us on the free service hotline' => 'Wir können Ihnen dennoch helfen,	kontaktieren Sie gerne unseren Support unter der kostenlosen Hotline',
 	
 	 

@@ -33,7 +33,7 @@
 									<template data-lysine-view data-for="candidates">
 										<div class="visa-result-candidates">
 											<template data-lysine-view data-for="documents">
-												<div class="row s5 l4 product">
+												<div class="row s5 l5 product ng-lr">
 													<div class="span s3 l3" data-condition="null(product) == false">
 														<label  class="description">
 															<input type="radio" name="document" class="frm-ctrl visa-result-radio" data-lysine-data-product="{{product.id}}" data-for="product.selected" >
@@ -42,8 +42,11 @@
 															<span data-for="name" data-lysine-class="{{recommended?highlight:secondary}}"></span>
 														</label>
 													</div>
-													<div class="span s2 l1" data-condition="null(product) == false" style="text-align: right;">
-														<a class="buy-now" target="_blank" data-lysine-href="{{product.url}}"><span data-for="product.price.natural"></span> €</a>
+													<div class="span s2 l2" data-condition="null(product) == false" style="text-align: right;">
+														<a class="buy-now" target="_blank" data-lysine-href="{{product.url}}">
+															<span class="cart-icon"></span>
+															<?= $translations['Order now'] ?>
+														</a>
 													</div>
 												</div>
 											</template>

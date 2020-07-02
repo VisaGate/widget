@@ -46,6 +46,7 @@ $translations = [
 	'Please select the appropriate visa' => 'Please select the appropriate visa',
 	'No visa available' => 'No visa available',
 	'No visa required' => 'No visa required',
+	'Order now' => 'Bestellen',
 	'We can still help. Reach out to us on the free service hotline' => 'We can still help. Reach out to us on the free service hotline',
 	
 	 
