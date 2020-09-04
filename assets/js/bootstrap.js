@@ -48,13 +48,6 @@
 			console.log(e);
 		}
 		
-		depend(['ui/shadowinput'], function (Shadow) {
-			var shadow = new Shadow('Enter your message...', function (text, c) { 
-				c(text.split('').reverse().join(''));
-			});
-			document.body.appendChild(shadow.outer);
-		} );
-		
 	};
 	
 	var loadSynchronousNext = function () {

@@ -32,24 +32,32 @@
 								<form data-lysine-data-sid="{{_sid}}">
 									<template data-lysine-view data-for="candidates">
 										<div class="visa-result-candidates">
-											<template data-lysine-view data-for="documents">
-												<div class="row s5 l5 product ng-lr">
-													<div class="span s3 l3" data-condition="null(product) == false">
-														<label  class="description">
-															<input type="radio" name="document" class="frm-ctrl visa-result-radio" data-lysine-data-product="{{product.id}}" data-for="product.selected" >
-															<span class="frm-ctrl-rad"></span>
-
-															<span data-for="name" data-lysine-class="{{recommended?highlight:secondary}}"></span>
-														</label>
-													</div>
-													<div class="span s2 l2" data-condition="null(product) == false" style="text-align: right;">
-														<a class="buy-now" target="_blank" data-lysine-href="{{product.url}}">
-															<span class="cart-icon"></span>
-															<?= $translations['Order now'] ?>
-														</a>
-													</div>
+											<div class="row s5 l9 product ng-lr">
+												<div class="span s1 l1">
+													<label  class="description">
+														<input type="radio" name="document" class="frm-ctrl visa-result-radio" data-lysine-data-product="{{product.id}}" data-for="product.selected" >
+														<span class="frm-ctrl-rad"></span>
+													</label>
 												</div>
-											</template>
+												<div class="span s4 l8">
+													<template data-lysine-view data-for="documents">
+														<div class="row s5 l5 product ng-lr">
+															<div class="span s3 l3" data-condition="null(product) == false">
+																<label  class="description">
+
+																	<span data-for="name" data-lysine-class="{{recommended?highlight:secondary}}"></span>
+																</label>
+															</div>
+															<div class="span s2 l2" data-condition="null(product) == false" style="text-align: right;">
+																<a class="buy-now" target="_blank" data-lysine-href="{{product.url}}">
+																	<span class="cart-icon"></span>
+																	<?= $translations['Order now'] ?>
+																</a>
+															</div>
+														</div>
+													</template>
+												</div>
+											</div>
 										</div>
 									</template>
 									<input type="hidden" name="selected" value="0">

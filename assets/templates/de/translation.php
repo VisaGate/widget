@@ -39,7 +39,7 @@ $translations = [
 	# visa.output.export.html
 	'Need detailed information which information you need for your visa request' => 'Benötigen Sie die detaillierte Aufstellung der Informationen für Ihre Visabeantragung',
 	'We can send it to you' => 'Wir senden Ihnen die Informationen zu',
-	'email address' => 'Email Adresse',
+	'email address' => 'E-mail Adresse',
 	'Send' => 'Senden',
 	 
 	# visa.output.html

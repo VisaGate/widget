@@ -38,16 +38,21 @@ and open the template in the editor.
 		width: 95%;
 		box-shadow: 0 0 3px rgba(0, 0, 0, .3);
 		border-radius: 5px;
-		padding: .5rem 0;
+		padding: 0;
 		left: 2.5%;
 		z-index: 5;
 		background: #FFF;
 		margin-top: 5px;
+		
+		&.dropdownlist-hidden {
+			display: none;
+		}
 	}
 
 	.autocomplete-results-anchor {
 		width: 100%;
 	}
+	
 }
 
 @media all and (min-width: 601px) {
