@@ -1,2 +1,8 @@
 /nbproject/private
 /partners
+/sass
+/assets/css
+/assets/templates/
+!/assets/templates/_
+!/assets/templates/en/translation.php
+!/assets/templates/de/translation.php
