@@ -98,6 +98,7 @@ depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promise
 								ISO: input.value, 
 								lat: input.dataset.lat, 
 								lon: input.dataset.lon, 
+								flag: api + '/image/flag/' + input.value,
 								reason: view.find('#reason').value
 							});
 							
