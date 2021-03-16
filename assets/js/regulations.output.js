@@ -5,7 +5,7 @@
  */
 
 
-depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'autocomplete'], function (request, Lysine, Promise, pipe, autocomplete) {
+depend(['m3/core/lysine', 'pipe'], function (Lysine, pipe) {
 	
 	var assetsURL = document.querySelector('meta[name="vg.assets"]').content;
 	var language  = document.querySelector('meta[name="vg.language"]').content;
@@ -13,9 +13,10 @@ depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'aut
 	return {
 		init : function (parent, api) { 
 			return new Promise(function (success, failure) {
-				request(assetsURL + '/templates/' + language + '/regulations.output.html')
-					.then(function (response) {
-						parent.innerHTML = response;
+				fetch(assetsURL + '/templates/' + language + '/regulations.output.html')
+					.then(response => response.text())
+					.then(function (body) {
+						parent.innerHTML = body;
 
 						var view = new Lysine.view('regulation');
 						view.setData({});

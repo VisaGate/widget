@@ -5,7 +5,7 @@
  */
 
 
-depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promises/promise', 'ui/dropdownlist', 'levenshtein'], function (request, Lysine, pipe, autocomplete, Promise, dropdown, levenshtein) {
+depend(['m3/core/lysine', 'pipe', 'autocomplete', 'ui/dropdownlist', 'levenshtein'], function (Lysine, pipe, autocomplete, dropdown, levenshtein) {
 	
 	var meta = function (name, def) {
 		return document.querySelector('meta[name="' + name + '"]')? document.querySelector('meta[name="' + name + '"]').content : def;
@@ -18,9 +18,10 @@ depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promise
 	return {
 		init : function (parent, api) {
 			return new Promise(function (success, error) {
-				request(assetsURL + '/templates/' + language  + '/country.multiple.html')
-				.then(function (response) {
-					parent.innerHTML = response;
+				fetch(assetsURL + '/templates/' + language  + '/country.multiple.html')
+				.then(response => response.text())
+				.then(function (body) {
+					parent.innerHTML = body;
 
 					var view = new Lysine.view('country-multiple');
 					view.setData({stops : []});
@@ -29,8 +30,8 @@ depend(['m3/core/request', 'm3/core/lysine', 'pipe', 'autocomplete', 'm3/promise
 					 * Initialize the autocomplete system.
 					 */
 					var ac = autocomplete(view.find('.autocomplete-target'), function (input, output, entry) {
-						request(api + '/search/find/country/' + input + '.json')
-						.then(JSON.parse)
+						fetch(api + '/search/find/country/' + input + '.json')
+						.then(response => response.json())
 						.then(function (r) {
 							var ret = [];
 							var c = 0;

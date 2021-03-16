@@ -5,7 +5,7 @@
  */
 
 
-depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'autocomplete'], function (request, Lysine, Promise, pipe, autocomplete) {
+depend(['m3/core/lysine', 'pipe', 'autocomplete'], function (Lysine, pipe, autocomplete) {
 	
 	var assetsURL = document.querySelector('meta[name="vg.assets"]').content;
 	var language  = document.querySelector('meta[name="vg.language"]').content;
@@ -13,16 +13,17 @@ depend(['m3/core/request', 'm3/core/lysine', 'm3/promises/promise', 'pipe', 'aut
 	return {
 		init : function (parent, api) { 
 			return new Promise(function (success, failure) {
-				request(assetsURL + '/templates/' + language + '/people.multiple.html')
-					.then(function (response) {
-						parent.innerHTML = response;
+				fetch(assetsURL + '/templates/' + language + '/people.multiple.html')
+					.then(response => response.text())
+					.then(function (body) {
+						parent.innerHTML = body;
 
 						var view = new Lysine.view('multiple-people');
 						view.setData({passengers: []});
 
 						var ac = autocomplete(view.find('.autocomplete-passport'), function (input, output, entry) {
-							request(api + '/search/find/document/' + input + '.json')
-							.then(JSON.parse)
+							fetch(api + '/search/find/document/' + input + '.json')
+							.then(response => response.json())
 							.then(function (r) {
 								var ret = [];
 								var c = 0;

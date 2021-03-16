@@ -1,0 +1,27 @@
+{
+  "name": "visa-gate-discovery-widget",
+  "version": "0.1.0",
+  "description": "Visa-gate Discovery Widget. Allows adding a widget to your website.",
+  "main": "assets/js/init.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"build": "mix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@phabricator.magic3w.com/source/Visa-Discovery-Widget.git"
+  },
+  "keywords": [
+    "visa",
+    "travel",
+    "widget"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "find-parent": "^2.0.2"
+  },
+  "devDependencies": {
+    "laravel-mix": "^6.0.13"
+  }
+}

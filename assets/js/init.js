@@ -13,21 +13,18 @@
 	};
 	
 	var loadScaffolding = function (then) {
-		var xhr = new XMLHttpRequest();
-		xhr.open('GET', baseURL + '/templates/' + language + '/scaffolding.html');
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState === 4 && xhr.status === 200) {
-				document.getElementById('visa-gate-widget').innerHTML = xhr.responseText;
-				then();
-			}
-		}
-		xhr.send();
+		fetch(baseURL + '/templates/' + language + '/scaffolding.html')
+		.then(response => response.text())
+		.then(function (body) {
+			document.getElementById('visa-gate-widget').innerHTML = body;
+			then();
+		});
 	};
 	
 	var init = function () {
 		depend(
-			['country.multiple', 'people.multiple', 'visa.output', 'visa.output.export', 'regulations.output', 'map', 'pipe', 'm3/promises/promise', 'm3/core/request', 'm3/core/collection'], 
-			function (target, people, visa, modExport, regout, map, pipe, Promise, request, collect) {
+			['country.multiple', 'people.multiple', 'visa.output', 'visa.output.export', 'regulations.output', 'map', 'pipe', 'm3/core/collection'], 
+			function (target, people, visa, modExport, regout, map, pipe, collect) {
 
 			var api = document.querySelector('meta[name="vg.api"]') ? document.querySelector('meta[name="vg.api"]').content : 'https://discovery.visa-gate.com/';;
 			var targets = undefined;
@@ -106,13 +103,18 @@
 
 
 
-					request(api + '/itinerary/test.json', {
-						people: collect(people).each(function (e) { return {name: e.name, documents: [e.document]}; }).raw(),
-						stops: collect(stops).each(function (e) { return { country: e.ISO, reason: e.reason }; }).raw()
+					fetch(api + '/itinerary/test.json', {
+						method: 'POST',
+						headers: {
+							'Content-type' : 'application/json'
+						},
+						body: JSON.stringify({
+							people: collect(people).each(function (e) { return {name: e.name, documents: [e.document]}; }).raw(),
+							stops: collect(stops).each(function (e) { return { country: e.ISO, reason: e.reason }; }).raw()
+						})
 					})
-					.then(JSON.parse)
+					.then(response => response.json())
 					.then(function (payload) {
-						console.log(payload);
 						for (var i = 0; i < payload.payload.length; i++) {
 							payload.payload[i]._pid = people[i]._pid;
 							for (var j = 0; j < payload.payload[i].stops.length; j++) {
@@ -135,8 +137,8 @@
 						return; 
 					}
 
-					request(api + '/country/regulations/' + isos.join(':') + '.json')
-						.then(JSON.parse)
+					fetch(api + '/country/regulations/' + isos.join(':') + '.json')
+						.then(response => response.json())
 						.then(function (payload) {
 							output(payload.payload);
 						});

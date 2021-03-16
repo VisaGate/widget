@@ -1,5 +1,5 @@
 
-depend(['m3/promises/promise', 'm3/core/request', 'm3/core/lysine', 'pipe'], function (Promise, request, Lysine, pipe) {
+depend(['m3/core/lysine', 'pipe'], function (Lysine, pipe) {
 	
 	var assetsURL = document.querySelector('meta[name="vg.assets"]').content;
 	var language  = document.querySelector('meta[name="vg.language"]').content;
@@ -7,19 +7,16 @@ depend(['m3/promises/promise', 'm3/core/request', 'm3/core/lysine', 'pipe'], fun
 	return {
 		init : function (parent, api) {
 			return new Promise(function (success, failure) {
-				request(assetsURL + '/templates/' + language + '/map.html').then(function (response) {
-					parent.innerHTML = response;
+				fetch(assetsURL + '/templates/' + language + '/map.html')
+				.then(response => response.text())
+				.then(function (body) {
+					parent.innerHTML = body;
 					
 					var view = new Lysine.view('map');
 					var mapimage = view.find('#mapimg');
 					view.setData({stops: []});
 					
-					console.log('Initialized map');
-					
 					success(pipe(function (input, output) {
-						console.log('Map pipe');
-						console.log(input[0]);
-						
 						var stops = JSON.parse(JSON.stringify(input[0]));
 						var label = true;
 						
