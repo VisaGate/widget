@@ -22,6 +22,6 @@
     "find-parent": "^2.0.2"
   },
   "devDependencies": {
-    "laravel-mix": "^6.0.13"
+    "laravel-mix": "^6.0.49"
   }
 }
